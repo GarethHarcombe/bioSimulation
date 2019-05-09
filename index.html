@@ -27,7 +27,7 @@
             start: function () {
                 this.canvas.width = 480;
                 this.canvas.height = 270;
-                for (i = 0; i < 20; i++) {
+                for (i = 0; i < 5; i++) {
                     food.push(new component(5, 5, "green", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
                 }
                 this.context = this.canvas.getContext("2d");
@@ -60,6 +60,20 @@
                 if (animals[i].x > myGameArea.canvas.width - animals[i].width) { animals[i].angle = Math.PI; }
                 if (animals[i].y < 0) { animals[i].angle = Math.PI / 2; }
                 if (animals[i].y > myGameArea.canvas.height  - animals[i].height) { animals[i].angle = 3 * Math.PI / 2; }
+
+                shortestDistance = 75;
+                newAngle = 0;
+                food.forEach(element => {
+                    distance = Math.sqrt(Math.pow(animals[i].x - element.x, 2) + Math.pow(animals[i].y - element.y, 2));
+                    if (distance < shortestDistance) {
+                        shortestDistance = distance;
+                        newAngle = Math.atan2(element.y - animals[i].y, element.x - animals[i].x);
+                    }
+                })
+                if (shortestDistance != 75) {
+                    animals[i].angle = newAngle;
+                }
+
                 animals[i].x += Math.cos(animals[i].angle);
                 animals[i].y += Math.sin(animals[i].angle);
                 animals[i].update();
