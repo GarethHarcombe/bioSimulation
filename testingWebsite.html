@@ -12,12 +12,13 @@
     </head>
     <body onload="startGame()">
     <script>
-        var redGamePiece, blueGamePiece, yellowGamePiece;
+        var animals = [];
+        var food = [];
         
         function startGame() {
-            redGamePiece = new component(75, 75, "red", 10, 10);
-            yellowGamePiece = new component(75, 75, "yellow", 50, 60);
-            blueGamePiece = new component(75, 75, "blue", 10, 220);
+            for (i = 0; i < 5; i++) {
+                animals.push(new component(20, 20, "red", 240, 135));
+            }
             myGameArea.start();
         }
 
@@ -26,6 +27,9 @@
             start: function () {
                 this.canvas.width = 480;
                 this.canvas.height = 270;
+                for (i = 0; i < 20; i++) {
+                    food.push(new component(5, 5, "green", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
+                }
                 this.context = this.canvas.getContext("2d");
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
                 this.interval = setInterval(updateGameArea, 20);
@@ -40,6 +44,7 @@
             this.height = height;
             this.x = x;
             this.y = y;
+            this.angle = 0;
             this.update = function () {
                 ctx = myGameArea.context;
                 ctx.fillStyle = color;
@@ -49,14 +54,20 @@
 
         function updateGameArea() {
             myGameArea.clear();
-            redGamePiece.x += 1;
-            yellowGamePiece.x += 1;
-            yellowGamePiece.y += 1;
-            blueGamePiece.x += 1;
-            blueGamePiece.y -= 1;
-            redGamePiece.update();
-            yellowGamePiece.update();
-            blueGamePiece.update();
+            for (i = 0; i < animals.length; i++) {
+                animals[i].angle += (Math.random() * 2 - 1) / 4;
+                if (animals[i].x < 0) { animals[i].angle = 0; }
+                if (animals[i].x > myGameArea.canvas.width - animals[i].width) { animals[i].angle = Math.PI; }
+                if (animals[i].y < 0) { animals[i].angle = Math.PI / 2; }
+                if (animals[i].y > myGameArea.canvas.height  - animals[i].height) { animals[i].angle = 3 * Math.PI / 2; }
+                animals[i].x += Math.cos(animals[i].angle);
+                animals[i].y += Math.sin(animals[i].angle);
+                animals[i].update();
+            }
+
+            for (i = 0; i < food.length; i++) {
+                food[i].update();
+            }
         }
     </script>
     <p>The three components moves by changing the x- and y-coordinates on every update.</p>
