@@ -2,122 +2,23 @@
 <html>
     <head>
         <title>Title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <style>
-            canvas {
-                border:1px solid #d3d3d3;
-                background-color: #f1f1f1;
-            }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css">
     </head>
     <body onload="startGame()">
-        <script>
-            var animals = [];
-            var food = [];
-            var frames = 0;
-            var food_spawn_rate = 30;
+        <p>Speed</p>
+        
+        <div class="slide_container">
+            <input type="range" min="1" max="10" value="5" class="slider" id="speed_slider">
+            <p>Value: <span id="speed_value"></span></p>
+        </div>
 
-            function startGame() {
-                myGameArea.start();
-            }
+        <div class="current_information_container">
+            <p>Current Population: <span id="population_value"></span></p>
+            <p>Average Population Speed: <span id="average_speed_value"></span></p>
+            <p>Average Sense Radius: <span id="average_sense_value"></span></p>
+        </div>
 
-            var myGameArea = {
-                canvas: document.createElement("canvas"),
-                start: function () {
-                    this.canvas.width = 480;
-                    this.canvas.height = 270;
-                    for (i = 0; i < 10; i++) {
-                        food.push(new component(5, 5, "green", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
-                    }
-                    for (i = 0; i < 5; i++) {
-                        animals.push(new component(20, 20, "red", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
-                    }
-
-                    this.context = this.canvas.getContext("2d");
-                    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                    this.interval = setInterval(updateGameArea, 20);
-                },
-                clear: function () {
-                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                }
-            }
-
-            function component(width, height, color, x, y) {
-                this.width = width;
-                this.height = height;
-                this.x = x;
-                this.y = y;
-                this.angle = 0;
-                this.energy = 300;
-                this.speed = 5;
-                this.sense_distance = 75;
-                this.update = function () {
-                    ctx = myGameArea.context;
-                    ctx.fillStyle = color;
-                    ctx.fillRect(this.x, this.y, this.width, this.height);
-                }
-
-                this.crashWith = function (otherobj) {
-                    var crash = true;
-                    if ((this.y + (this.height) < otherobj.y) ||
-                        (this.y > otherobj.y + (otherobj.height)) ||
-                        (this.x + (this.width) < otherobj.x) ||
-                        (this.x > otherobj.x + (otherobj.width))) {
-                        crash = false;
-                    }
-                    return crash;
-                }
-            }
-
-            function updateGameArea() {
-                frames++;
-                myGameArea.clear();
-                animals.forEach(element => {
-                    element.angle += (Math.random() * 2 - 1) / 4;
-                    if (element.x < 0) { element.angle = 0; }
-                    if (element.x > myGameArea.canvas.width - element.width) { element.angle = Math.PI; }
-                    if (element.y < 0) { element.angle = Math.PI / 2; }
-                    if (element.y > myGameArea.canvas.height - element.height) { element.angle = 3 * Math.PI / 2; }
-
-                    shortestDistance = element.sense_distance;
-                    newAngle = 0;
-                    food.forEach(element2 => {
-                        distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
-                        if (distance < shortestDistance) {
-                            shortestDistance = distance;
-                            newAngle = Math.atan2(element2.y - element.y, element2.x - element.x);
-                        }
-
-                        if (element.crashWith(element2)) {
-                            food.splice(food.indexOf(element2), 1);
-                            element.energy = 300;
-                            delete element2;
-                        }
-                    })
-                    if (shortestDistance != 75) {
-                        element.angle = newAngle;
-                    }
-
-                    element.x += element.speed * Math.cos(element.angle);
-                    element.y += element.speed * Math.sin(element.angle);
-                    element.energy -= 1;
-                    element.update();
-                    if (element.energy < 0) {
-                        console.log("Out of energy!" + animals.indexOf(element));
-                        console.log(animals);
-                        animals.splice(animals.indexOf(element), 1);
-                    }
-                })
-
-                for (i = 0; i < food.length; i++) {
-                    food[i].update();
-                }
-
-                if (frames % food_spawn_rate == 0) {
-                    food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
-                }
-            }
-        </script>
-        <p>Simulation</p>
+        <script src="app.js"></script>
     </body>
 </html>
