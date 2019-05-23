@@ -8,17 +8,17 @@ var mutation_change_rate = 0.1;
 var eating_size_percentage = 0.5;
 var food_value = 100;
 
-var speed_slider = document.getElementById("speed_slider");
-var speed_output = document.getElementById("speed_value");
+var food_spawn_slider = document.getElementById("food_spawn_slider");
+var food_spawn_output = document.getElementById("food_spawn_value");
 var population_output = document.getElementById("population_value");
 var average_speed_output = document.getElementById("average_speed_value");
 var average_sense_output = document.getElementById("average_sense_value");
 var average_size_output = document.getElementById("average_size_value");
-speed_output.innerHTML = speed_slider.value;
+food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
 
-speed_slider.oninput = function () {
-    speed_output.innerHTML = this.value;
-    start_speed = this.value;
+food_spawn_slider.oninput = function () {
+    food_spawn_output.innerHTML = this.value;
+    food_spawn_rate = Math.ceil(50 / this.value);
 }
 
 function startGame() {
