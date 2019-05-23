@@ -5,6 +5,8 @@ var food_spawn_rate = 10;
 var start_speed = 3;
 var start_sense_distance = 75;
 var mutation_change_rate = 0.1;
+var eating_size_percentage = 0.5;
+var food_value = 100;
 
 var speed_slider = document.getElementById("speed_slider");
 var speed_output = document.getElementById("speed_value");
@@ -100,17 +102,41 @@ function updateGameArea() {
 
             if (element.crashWith(element2)) {
                 food.splice(food.indexOf(element2), 1);
-                element.energy += 100;
+                element.energy += food_value;
                 delete element2;
             }
         })
+
+        animals.forEach(element2 => {
+            if (element != element2) {
+                distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
+                if (distance < element.sense_distance) {
+                    if (element.width >= element2.width * (1 + eating_size_percentage) &&
+                        distance / (element2.width * element2.height / food_value) < shortestDistance) {
+                        shortestDistance = distance / (element2.width * element2.height / food_value);
+                        newAngle = Math.atan2(element2.y - element.y, element2.x - element.x);
+
+                        if (element.crashWith(element2)) {
+                            element.energy += element2.width * element2.height;
+                            animals.splice(animals.indexOf(element2), 1);
+                        }
+                    }
+
+                    if (element.width <= element2.width * (1 - eating_size_percentage)) {
+                        shortestDistance = 1;
+                        newAngle = Math.atan2(element2.y - element.y, element2.x - element.x) + Math.PI;
+                    }
+                }
+            }
+        })
+
         if (shortestDistance != element.sense_distance) {
             element.angle = newAngle;
         }
 
         element.x += element.speed * Math.cos(element.angle);
         element.y += element.speed * Math.sin(element.angle);
-        element.energy -= ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2) + 1;
+        element.energy -= 0.5 * ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2) + 1;
         element.update();
         if (element.energy < 0) {
             animals.splice(animals.indexOf(element), 1);
