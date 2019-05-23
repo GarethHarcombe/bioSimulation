@@ -1,9 +1,10 @@
 var animals = [];
 var food = [];
 var frames = 0;
-var food_spawn_rate = 30;
+var food_spawn_rate = 10;
 var start_speed = 3;
 var start_sense_distance = 75;
+var mutation_change_rate = 0.1;
 
 var speed_slider = document.getElementById("speed_slider");
 var speed_output = document.getElementById("speed_value");
@@ -99,7 +100,7 @@ function updateGameArea() {
 
             if (element.crashWith(element2)) {
                 food.splice(food.indexOf(element2), 1);
-                element.energy += 300;
+                element.energy += 100;
                 delete element2;
             }
         })
@@ -115,22 +116,23 @@ function updateGameArea() {
             animals.splice(animals.indexOf(element), 1);
         }
         else if (element.energy >= 600) {
-            if (Math.random() < 0.5) { element.speed = element.speed * 0.7; }
-            else { element.speed = element.speed * 1.3; }
+            for (i = 1; i <= 2; i++) {
+                if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
+                else { element.speed = element.speed * (1 + mutation_change_rate); }
 
-            if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * 0.7; }
-            else { element.sense_distance = element.sense_distance * 1.3; }
+                if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * (1 - mutation_change_rate); }
+                else { element.sense_distance = element.sense_distance * (1 + mutation_change_rate); }
 
-            colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
-            if (colour.toString().length == 1) { colour = "0" + colour }
+                colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
+                if (colour.toString().length == 1) { colour = "0" + colour }
 
-            if (Math.random() < 0.5) { element.width = element.width * 0.7; }
-            else { element.width = element.width * 1.3; }
-            if (element.width < 1) { element.width = 1}
-            element.height = element.width;
+                if (Math.random() < 0.5) { element.width = element.width * (1 - mutation_change_rate); }
+                else { element.width = element.width * (1 + mutation_change_rate); }
+                if (element.width < 1) { element.width = 1 }
+                element.height = element.width;
 
-            animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
-            animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
+                animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
+            }
             animals.splice(animals.indexOf(element), 1);
         }
     })
@@ -142,8 +144,11 @@ function updateGameArea() {
     if (frames % food_spawn_rate == 0) {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
-    average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
-    average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
-    average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
-    population_output.innerHTML = animals.length;
+
+    if (frames % 50 == 0) {
+        average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
+        average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
+        average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
+        population_output.innerHTML = animals.length;
+    }
 }
