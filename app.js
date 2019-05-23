@@ -10,6 +10,7 @@ var speed_output = document.getElementById("speed_value");
 var population_output = document.getElementById("population_value");
 var average_speed_output = document.getElementById("average_speed_value");
 var average_sense_output = document.getElementById("average_sense_value");
+var average_size_output = document.getElementById("average_size_value");
 speed_output.innerHTML = speed_slider.value;
 
 speed_slider.oninput = function () {
@@ -73,10 +74,13 @@ function updateGameArea() {
     frames++;
     total_speed = 0;
     total_sense = 0;
+    total_size = 0;
     myGameArea.clear();
     animals.forEach(element => {
         total_speed += element.speed;
         total_sense += element.sense_distance;
+        total_size += element.width;
+
         element.angle += (Math.random() * 2 - 1) / 4;
         
         if (element.x < 0) { element.angle = 0; }
@@ -105,7 +109,7 @@ function updateGameArea() {
 
         element.x += element.speed * Math.cos(element.angle);
         element.y += element.speed * Math.sin(element.angle);
-        element.energy -= ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2);
+        element.energy -= ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2) + 1;
         element.update();
         if (element.energy < 0) {
             animals.splice(animals.indexOf(element), 1);
@@ -119,6 +123,11 @@ function updateGameArea() {
 
             colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
             if (colour.toString().length == 1) { colour = "0" + colour }
+
+            if (Math.random() < 0.5) { element.width = element.width * 0.7; }
+            else { element.width = element.width * 1.3; }
+            if (element.width < 1) { element.width = 1}
+            element.height = element.width;
 
             animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
             animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
@@ -135,5 +144,6 @@ function updateGameArea() {
     }
     average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
     average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
+    average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
     population_output.innerHTML = animals.length;
 }
