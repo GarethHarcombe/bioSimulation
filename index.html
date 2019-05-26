@@ -6,11 +6,17 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body onload="startGame()">
-        
+
         <p>Food Spawn</p>
         <div class="slide_container">
             <input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider">
             <p>Food Spawn Rate: <span id="food_spawn_value"></span></p>
+        </div>
+
+        <p>Food Nutrition</p>
+        <div class="slide_container">
+            <input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider">
+            <p>Food Nutritional Value: <span id="food_value_value"></span></p>
         </div>
 
         <div class="current_information_container">

@@ -10,15 +10,24 @@ var food_value = 100;
 
 var food_spawn_slider = document.getElementById("food_spawn_slider");
 var food_spawn_output = document.getElementById("food_spawn_value");
+var food_value_slider = document.getElementById("food_value_slider");
+var food_value_output = document.getElementById("food_value_value");
+
 var population_output = document.getElementById("population_value");
 var average_speed_output = document.getElementById("average_speed_value");
 var average_sense_output = document.getElementById("average_sense_value");
 var average_size_output = document.getElementById("average_size_value");
 food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
+food_value_output.innerHTML = food_value_slider.value;
 
 food_spawn_slider.oninput = function () {
     food_spawn_output.innerHTML = this.value;
     food_spawn_rate = Math.ceil(50 / this.value);
+}
+
+food_value_slider.oninput = function () {
+    food_value_output.innerHTML = this.value;
+    food_value = parseInt(this.value, 10);
 }
 
 function startGame() {
@@ -102,11 +111,11 @@ function updateGameArea() {
 
             if (element.crashWith(element2)) {
                 food.splice(food.indexOf(element2), 1);
-                element.energy += food_value;
+                element.energy = element.energy + food_value;
                 delete element2;
             }
         })
-
+        
         animals.forEach(element2 => {
             if (element != element2) {
                 distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
