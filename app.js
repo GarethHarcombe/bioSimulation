@@ -8,6 +8,58 @@ var mutation_change_rate = 0.1;
 var eating_size_percentage = 0.5;
 var food_value = 100;
 
+var population_data = [];
+var time = []
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: time,
+        datasets: [{
+            label: 'Population',
+            data: population_data,
+            fill: false,
+            backgroundColor: "#FF0000",
+            borderColor: "#FF0000",
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Population Stats over Time'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Time (seconds)'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
+                }
+            }]
+        }
+    }
+});
+
 var food_spawn_slider = document.getElementById("food_spawn_slider");
 var food_spawn_output = document.getElementById("food_spawn_value");
 var food_value_slider = document.getElementById("food_value_slider");
@@ -180,10 +232,14 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 50 == 0) {
+    if (frames % 150 == 0) {
         average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
         average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
         average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
         population_output.innerHTML = animals.length;
+
+        population_data.push(animals.length);
+        time.push(frames / 50);
+        myChart.update();
     }
 }
