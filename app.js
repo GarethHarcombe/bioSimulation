@@ -9,7 +9,16 @@ var eating_size_percentage = 0.5;
 var food_value = 100;
 
 var population_data = [];
-var time = []
+var food_data = [];
+var size_data = [];
+var speed_data = [];
+var sense_data = [];
+var highest_population = 1;
+var highest_food = 1;
+var highest_size = 1;
+var highest_speed = 1;
+var highest_sense = 1;
+var time = [];
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -22,21 +31,48 @@ var myChart = new Chart(ctx, {
             backgroundColor: "#FF0000",
             borderColor: "#FF0000",
             borderWidth: 1
+        },
+        {
+            label: 'Food',
+            data: food_data,
+            fill: false,
+            backgroundColor: "green",
+            borderColor: "green",
+            borderWidth: 1
+        },
+        {
+            label: 'Average Size',
+            data: size_data,
+            fill: false,
+            backgroundColor: "black",
+            borderColor: "black",
+            borderWidth: 1
+        },
+        {
+            label: 'Average Speed',
+            data: speed_data,
+            fill: false,
+            backgroundColor: "blue",
+            borderColor: "blue",
+            borderWidth: 1
+        },
+        {
+            label: 'Average Sense Distance',
+            data: sense_data,
+            fill: false,
+            backgroundColor: "pink",
+            borderColor: "pink",
+            borderWidth: 1
         }]
     },
     options: {
+        animation: {
+            duration: 0
+        },
         responsive: true,
         title: {
             display: true,
-            text: 'Population Stats over Time'
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
+            text: 'Stats over Time'
         },
         scales: {
             xAxes: [{
@@ -232,13 +268,56 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 150 == 0) {
+    if (frames % 100 == 0) {
         average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
         average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
         average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
         population_output.innerHTML = animals.length;
+        /*
+        if (highest_population < animals.length) {
+            population_data.forEach(element => {
+                element = element * highest_population / animals.length;
+            })
+            highest_population = animals.length;
+        }
 
-        population_data.push(animals.length);
+        if (highest_food < food.length) {
+            food_data.forEach(element => {
+                element = element * highest_food / food.length;
+            })
+            highest_food = food.length;
+        }*/
+        /*
+        if (highest_population < animals.length) {
+            population_data.forEach(element => {
+                element = element * highest_population / animals.length;
+            })
+            highest_population = animals.length;
+        }
+
+        if (highest_population < animals.length) {
+            population_data.forEach(element => {
+                element = element * highest_population / animals.length;
+            })
+            highest_population = animals.length;
+        }
+
+        if (highest_population < animals.length) {
+            population_data.forEach(element => {
+                element = element * highest_population / animals.length;
+            })
+            highest_population = animals.length;
+        }*/
+
+        const map1 = population_data.map(x => x + 1);
+        population_data = map1;
+        console.log(population_data);
+
+        population_data.push(animals.length / highest_population);
+        food_data.push(food.length / highest_food);
+        /*size_data.push((total_size / animals.length).toFixed(2) / highest_size);
+        speed_data.push((total_speed / animals.length).toFixed(2) / highest_speed);
+        sense_data.push((total_sense / animals.length).toFixed(2) / highest_sense);*/
         time.push(frames / 50);
         myChart.update();
     }
