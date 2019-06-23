@@ -270,7 +270,7 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 20 == 0) {
+    if (frames % 25 == 0) {
         average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
         average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
         average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
@@ -292,6 +292,12 @@ function updateGameArea() {
         speed_data.push((total_speed / animals.length).toFixed(2) / highest_speed);
         sense_data.push((total_sense / animals.length).toFixed(2) / highest_sense);*/
         time.push(frames / 50);
+
+        if (population_data.length > 60) {
+            population_data.shift();
+            food_data.shift();
+            time.shift();
+        }
         myChart.update();
     }
 }
