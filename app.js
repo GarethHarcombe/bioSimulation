@@ -70,6 +70,8 @@ var myChart = new Chart(ctx, {
             duration: 0
         },
         responsive: true,
+        tooltips: { enabled: false },
+        hover: { mode: null },
         title: {
             display: true,
             text: 'Stats over Time'
@@ -89,7 +91,7 @@ var myChart = new Chart(ctx, {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Value'
+                    labelString: 'Value Relative to Maximum'
                 }
             }]
         }
@@ -268,50 +270,21 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 100 == 0) {
+    if (frames % 20 == 0) {
         average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
         average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
         average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
         population_output.innerHTML = animals.length;
-        /*
+        
         if (highest_population < animals.length) {
-            population_data.forEach(element => {
-                element = element * highest_population / animals.length;
-            })
+            population_data.forEach((entry, i) => population_data[i] = entry * highest_population / animals.length);
             highest_population = animals.length;
         }
 
         if (highest_food < food.length) {
-            food_data.forEach(element => {
-                element = element * highest_food / food.length;
-            })
+            food_data.forEach((entry, i) => food_data[i] = entry * highest_food / food.length);
             highest_food = food.length;
-        }*/
-        /*
-        if (highest_population < animals.length) {
-            population_data.forEach(element => {
-                element = element * highest_population / animals.length;
-            })
-            highest_population = animals.length;
         }
-
-        if (highest_population < animals.length) {
-            population_data.forEach(element => {
-                element = element * highest_population / animals.length;
-            })
-            highest_population = animals.length;
-        }
-
-        if (highest_population < animals.length) {
-            population_data.forEach(element => {
-                element = element * highest_population / animals.length;
-            })
-            highest_population = animals.length;
-        }*/
-
-        const map1 = population_data.map(x => x + 1);
-        population_data = map1;
-        console.log(population_data);
 
         population_data.push(animals.length / highest_population);
         food_data.push(food.length / highest_food);
