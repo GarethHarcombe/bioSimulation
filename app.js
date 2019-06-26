@@ -8,6 +8,7 @@ var mutation_change_rate = 0.1;
 var eating_size_percentage = 0.5;
 var food_value = 100;
 var paused = false;
+var frame_rate = 20;
 
 var population_data = [];
 var food_data = [];
@@ -99,6 +100,11 @@ var myChart = new Chart(ctx, {
     }
 });
 
+var pausePlayButton = document.getElementById("pausePlayButton");
+pausePlayButton.onclick = pausePlayGame;
+var sim_speed_slider = document.getElementById("sim_speed_slider")
+var sim_speed_output = document.getElementById("sim_speed_value")
+
 var food_spawn_slider = document.getElementById("food_spawn_slider");
 var food_spawn_output = document.getElementById("food_spawn_value");
 var food_value_slider = document.getElementById("food_value_slider");
@@ -111,8 +117,12 @@ var average_size_output = document.getElementById("average_size_value");
 food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
 food_value_output.innerHTML = food_value_slider.value;
 
-var pausePlayButton = document.getElementById("pausePlayButton");
-pausePlayButton.onclick = pausePlayGame;
+sim_speed_slider.oninput = function () {
+    sim_speed_output.innerHTML = this.value / 20;
+    frame_rate = 400 / this.value;
+    window.clearInterval(interval);
+    interval = setInterval(updateGameArea, frame_rate);
+}
 
 food_spawn_slider.oninput = function () {
     food_spawn_output.innerHTML = this.value;
@@ -136,7 +146,7 @@ function pausePlayGame() {
     }
     else {
         paused = false;
-        interval = setInterval(updateGameArea, 20);
+        interval = setInterval(updateGameArea, frame_rate);
         pausePlayButton.innerHTML = "Pause";
     }
 }
@@ -155,7 +165,7 @@ var myGameArea = {
 
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        interval = setInterval(updateGameArea, 20);
+        interval = setInterval(updateGameArea, frame_rate);
     },
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);

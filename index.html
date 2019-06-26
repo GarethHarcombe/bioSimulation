@@ -7,10 +7,14 @@
     </head>
     <body onload="startGame()">
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <button id="pausePlayButton" type="button">Pause</button>
+        <input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
+        <p>Speed: <span id="sim_speed_value"></span></p>
+
         <div style="width:50%;">
             <canvas id="myChart"></canvas>
         </div>
-        <button id="pausePlayButton" type="button">Pause</button>
 
         <p>Food Spawn</p>
         <div class="slide_container">
