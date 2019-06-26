@@ -7,6 +7,7 @@ var start_sense_distance = 75;
 var mutation_change_rate = 0.1;
 var eating_size_percentage = 0.5;
 var food_value = 100;
+var paused = false;
 
 var population_data = [];
 var food_data = [];
@@ -110,6 +111,9 @@ var average_size_output = document.getElementById("average_size_value");
 food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
 food_value_output.innerHTML = food_value_slider.value;
 
+var pausePlayButton = document.getElementById("pausePlayButton");
+pausePlayButton.onclick = pausePlayGame;
+
 food_spawn_slider.oninput = function () {
     food_spawn_output.innerHTML = this.value;
     food_spawn_rate = Math.ceil(50 / this.value);
@@ -122,6 +126,19 @@ food_value_slider.oninput = function () {
 
 function startGame() {
     myGameArea.start();
+}
+
+function pausePlayGame() {
+    if (paused == false) {
+        paused = true;
+        window.clearInterval(interval);
+        pausePlayButton.innerHTML = "Play";
+    }
+    else {
+        paused = false;
+        interval = setInterval(updateGameArea, 20);
+        pausePlayButton.innerHTML = "Pause";
+    }
 }
 
 var myGameArea = {
@@ -138,7 +155,7 @@ var myGameArea = {
 
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
+        interval = setInterval(updateGameArea, 20);
     },
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
