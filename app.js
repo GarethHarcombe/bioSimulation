@@ -21,8 +21,9 @@ var highest_size = 1;
 var highest_speed = 1;
 var highest_sense = 1;
 var time = [];
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+var time_mutations = [];
+var overall_chart = document.getElementById("overall_chart").getContext('2d');
+var overall_chart_var = new Chart(overall_chart, {
     type: 'line',
     data: {
         labels: time,
@@ -41,7 +42,46 @@ var myChart = new Chart(ctx, {
             backgroundColor: "green",
             borderColor: "green",
             borderWidth: 1
+        }]
+    },
+    options: {
+        animation: {
+            duration: 0
         },
+        responsive: true,
+        tooltips: { enabled: false },
+        hover: { mode: null },
+        title: {
+            display: true,
+            text: 'Stats over Time'
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Time (seconds)'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value Relative to Maximum'
+                }
+            }]
+        }
+    }
+});
+var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
+var mutations_chart_var = new Chart(mutations_chart, {
+    type: 'line',
+    data: {
+        labels: time_mutations,
+        datasets: [
         {
             label: 'Average Size',
             data: size_data,
@@ -182,9 +222,12 @@ function component(width, height, color, x, y, speed = start_speed, sense_distan
     this.speed = speed;
     this.sense_distance = sense_distance;
     this.update = function () {
-        ctx = myGameArea.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        overall_chart = myGameArea.context;
+        overall_chart.fillStyle = color;
+        overall_chart.fillRect(this.x, this.y, this.width, this.height);
+        mutations_chart = myGameArea.context;
+        mutations_chart.fillStyle = color;
+        mutations_chart.fillRect(this.x, this.y, this.width, this.height);
     }
 
     this.crashWith = function (otherobj) {
@@ -297,12 +340,53 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
+    if (frames % 250 == 0) {
+        size_data.push((total_size / animals.length).toFixed(2) / highest_size);
+        speed_data.push((total_speed / animals.length).toFixed(2) / highest_speed);
+        sense_data.push((total_sense / animals.length).toFixed(2) / highest_sense);
+        time_mutations.push(frames / 50);
+
+        if (size_data.length > 60) {
+            size_data.shift();
+            speed_data.shift();
+            sense_data.shift();
+            time.shift();
+        }
+
+        if (highest_size < (total_size / animals.length).toFixed(2)) {
+            size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length).toFixed(2));
+            highest_size = (total_size / animals.length).toFixed(2);
+        }
+
+        if (highest_speed < (total_speed / animals.length).toFixed(2)) {
+            speed_data.forEach((entry, i) => speed_data[i] = entry * highest_speed / (total_speed / animals.length).toFixed(2));
+            highest_speed = (total_speed / animals.length).toFixed(2);
+        }
+
+        if (highest_sense < (total_sense / animals.length).toFixed(2)) {
+            sense_data.forEach((entry, i) => sense_data[i] = entry * highest_sense / (total_sense / animals.length).toFixed(2));
+            highest_sense = (total_sense / animals.length).toFixed(2);
+        }
+
+        mutations_chart_var.update();
+    }
+
     if (frames % 25 == 0) {
         average_speed_output.innerHTML = (total_speed / animals.length).toFixed(2);
         average_sense_output.innerHTML = (total_sense / animals.length).toFixed(2);
         average_size_output.innerHTML = (total_size / animals.length).toFixed(2);
         population_output.innerHTML = animals.length;
-        
+
+        population_data.push(animals.length / highest_population);
+        food_data.push(food.length / highest_food);
+        time.push(frames / 50);
+
+        if (population_data.length > 60) {
+            population_data.shift();
+            food_data.shift();
+            time.shift();
+        }
+
         if (highest_population < animals.length) {
             population_data.forEach((entry, i) => population_data[i] = entry * highest_population / animals.length);
             highest_population = animals.length;
@@ -313,18 +397,6 @@ function updateGameArea() {
             highest_food = food.length;
         }
 
-        population_data.push(animals.length / highest_population);
-        food_data.push(food.length / highest_food);
-        /*size_data.push((total_size / animals.length).toFixed(2) / highest_size);
-        speed_data.push((total_speed / animals.length).toFixed(2) / highest_speed);
-        sense_data.push((total_sense / animals.length).toFixed(2) / highest_sense);*/
-        time.push(frames / 50);
-
-        if (population_data.length > 60) {
-            population_data.shift();
-            food_data.shift();
-            time.shift();
-        }
-        myChart.update();
+        overall_chart_var.update();
     }
 }
