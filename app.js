@@ -341,31 +341,35 @@ function updateGameArea() {
     }
 
     if (frames % 250 == 0) {
-        size_data.push((total_size / animals.length).toFixed(2) / highest_size);
-        speed_data.push((total_speed / animals.length).toFixed(2) / highest_speed);
-        sense_data.push((total_sense / animals.length).toFixed(2) / highest_sense);
+        if (highest_size < (total_size / animals.length)) {
+            highest_size = (total_size / animals.length);
+            size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length));
+            
+        }
+
+        if (highest_speed < (total_speed / animals.length)) {
+            highest_speed = (total_speed / animals.length);
+            speed_data.forEach((entry, i) => speed_data[i] = entry * highest_speed / (total_speed / animals.length));
+            
+        }
+
+        if (highest_sense < (total_sense / animals.length)) {
+            highest_sense = (total_sense / animals.length);
+            sense_data.forEach((entry, i) => sense_data[i] = entry * highest_sense / (total_sense / animals.length));
+            
+        }
+
+        console.log((total_size / animals.length));
+        size_data.push((total_size / animals.length) / highest_size);
+        speed_data.push((total_speed / animals.length) / highest_speed);
+        sense_data.push((total_sense / animals.length) / highest_sense);
         time_mutations.push(frames / 50);
 
-        if (size_data.length > 60) {
+        if (size_data.length > 50) {
             size_data.shift();
             speed_data.shift();
             sense_data.shift();
-            time.shift();
-        }
-
-        if (highest_size < (total_size / animals.length).toFixed(2)) {
-            size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length).toFixed(2));
-            highest_size = (total_size / animals.length).toFixed(2);
-        }
-
-        if (highest_speed < (total_speed / animals.length).toFixed(2)) {
-            speed_data.forEach((entry, i) => speed_data[i] = entry * highest_speed / (total_speed / animals.length).toFixed(2));
-            highest_speed = (total_speed / animals.length).toFixed(2);
-        }
-
-        if (highest_sense < (total_sense / animals.length).toFixed(2)) {
-            sense_data.forEach((entry, i) => sense_data[i] = entry * highest_sense / (total_sense / animals.length).toFixed(2));
-            highest_sense = (total_sense / animals.length).toFixed(2);
+            time_mutations.shift();
         }
 
         mutations_chart_var.update();
