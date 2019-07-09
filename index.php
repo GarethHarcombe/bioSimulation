@@ -20,9 +20,11 @@
             <canvas id="mutations_chart"></canvas>
         </div>
 
-        <?php
-        echo "Hello World!";
-        ?>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+			<input type="hidden" name="mutations" value="false" />
+			Mutations? <input type="checkbox" id="mutationsCheck" name="mutations" value="true"/>
+			<input type="submit">
+		</form>
 
         <p>Food Spawn</p>
         <div class="slide_container">
@@ -43,6 +45,9 @@
             <p>Average Size: <span id="average_size_value"></span></p>
         </div>
 
+		<script>
+			var mutationsPHP = <?php echo (!empty($_GET['mutations']) ? $_GET['mutations'] : true); ?>;
+		</script>
         <script src="app.js"></script>
     </body>
 </html>

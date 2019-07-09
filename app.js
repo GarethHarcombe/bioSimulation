@@ -10,6 +10,14 @@ var food_value = 100;
 var paused = false;
 var frame_rate = 20;
 
+var mutations = false;
+console.log(mutationsPHP);
+if (mutationsPHP == true) {
+    console.log("mutations are on");
+    mutations = true;
+    document.getElementById("mutationsCheck").checked = true;
+}
+
 var population_data = [];
 var food_data = [];
 var size_data = [];
@@ -312,19 +320,21 @@ function updateGameArea() {
         }
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
-                if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
-                else { element.speed = element.speed * (1 + mutation_change_rate); }
+                colour = 00;
+                if (mutations == true) {
+                    if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
+                    else { element.speed = element.speed * (1 + mutation_change_rate); }
 
-                if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * (1 - mutation_change_rate); }
-                else { element.sense_distance = element.sense_distance * (1 + mutation_change_rate); }
+                    if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * (1 - mutation_change_rate); }
+                    else { element.sense_distance = element.sense_distance * (1 + mutation_change_rate); }
 
-                colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
-                if (colour.toString().length == 1) { colour = "0" + colour }
+                    if (colour.toString().length == 1) { colour = "0" + colour }
 
-                if (Math.random() < 0.5) { element.width = element.width * (1 - mutation_change_rate); }
-                else { element.width = element.width * (1 + mutation_change_rate); }
-                if (element.width < 1) { element.width = 1 }
-                element.height = element.width;
+                    if (Math.random() < 0.5) { element.width = element.width * (1 - mutation_change_rate); }
+                    else { element.width = element.width * (1 + mutation_change_rate); }
+                    if (element.width < 1) { element.width = 1 }
+                    element.height = element.width;
+                }
 
                 animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
             }
@@ -359,7 +369,6 @@ function updateGameArea() {
             
         }
 
-        console.log((total_size / animals.length));
         size_data.push((total_size / animals.length) / highest_size);
         speed_data.push((total_speed / animals.length) / highest_speed);
         sense_data.push((total_sense / animals.length) / highest_sense);
