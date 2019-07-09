@@ -10,14 +10,6 @@ var food_value = 100;
 var paused = false;
 var frame_rate = 20;
 
-var mutations = false;
-console.log(mutationsPHP);
-if (mutationsPHP == true) {
-    console.log("mutations are on");
-    mutations = true;
-    document.getElementById("mutationsCheck").checked = true;
-}
-
 var population_data = [];
 var food_data = [];
 var size_data = [];
@@ -84,69 +76,78 @@ var overall_chart_var = new Chart(overall_chart, {
         }
     }
 });
-var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
-var mutations_chart_var = new Chart(mutations_chart, {
-    type: 'line',
-    data: {
-        labels: time_mutations,
-        datasets: [
-        {
-            label: 'Average Size',
-            data: size_data,
-            fill: false,
-            backgroundColor: "black",
-            borderColor: "black",
-            borderWidth: 1
-        },
-        {
-            label: 'Average Speed',
-            data: speed_data,
-            fill: false,
-            backgroundColor: "blue",
-            borderColor: "blue",
-            borderWidth: 1
-        },
-        {
-            label: 'Average Sense Distance',
-            data: sense_data,
-            fill: false,
-            backgroundColor: "pink",
-            borderColor: "pink",
-            borderWidth: 1
-        }]
-    },
-    options: {
-        animation: {
-            duration: 0
-        },
-        responsive: true,
-        tooltips: { enabled: false },
-        hover: { mode: null },
-        title: {
-            display: true,
-            text: 'Stats over Time'
-        },
-        scales: {
-            xAxes: [{
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Time (seconds)'
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+
+var mutations = false;
+if (mutationsPHP == true) {
+    mutations = true;
+    document.getElementById("mutationsCheckbox").checked = true;
+    var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
+    var mutations_chart_var = new Chart(mutations_chart, {
+        type: 'line',
+        data: {
+            labels: time_mutations,
+            datasets: [
+                {
+                    label: 'Average Size',
+                    data: size_data,
+                    fill: false,
+                    backgroundColor: "black",
+                    borderColor: "black",
+                    borderWidth: 1
                 },
+                {
+                    label: 'Average Speed',
+                    data: speed_data,
+                    fill: false,
+                    backgroundColor: "blue",
+                    borderColor: "blue",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Average Sense Distance',
+                    data: sense_data,
+                    fill: false,
+                    backgroundColor: "pink",
+                    borderColor: "pink",
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            animation: {
+                duration: 0
+            },
+            responsive: true,
+            tooltips: { enabled: false },
+            hover: { mode: null },
+            title: {
                 display: true,
-                scaleLabel: {
+                text: 'Stats over Time'
+            },
+            scales: {
+                xAxes: [{
                     display: true,
-                    labelString: 'Value Relative to Maximum'
-                }
-            }]
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time (seconds)'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value Relative to Maximum'
+                    }
+                }]
+            }
         }
-    }
-});
+    });
+}
+else {
+    document.getElementById("mutations_chart").parentNode.removeChild(document.getElementById("mutations_chart"));
+}
 
 var pausePlayButton = document.getElementById("pausePlayButton");
 pausePlayButton.onclick = pausePlayGame;
@@ -350,7 +351,7 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 250 == 0) {
+    if (frames % 250 == 0 && mutations == true) {
         if (highest_size < (total_size / animals.length)) {
             highest_size = (total_size / animals.length);
             size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length));

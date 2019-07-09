@@ -22,7 +22,7 @@
 
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
 			<input type="hidden" name="mutations" value="false" />
-			Mutations? <input type="checkbox" id="mutationsCheck" name="mutations" value="true"/>
+			Mutations? <input type="checkbox" id="mutationsCheckbox" name="mutations" value="true"/>
 			<input type="submit">
 		</form>
 
