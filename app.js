@@ -388,24 +388,6 @@ function updateGameArea() {
     }
 
     if (frames % 250 == 0 && mutationsPHP == true) {
-        if (highest_size < (total_size / animals.length)) {
-            highest_size = (total_size / animals.length);
-            size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length));
-            
-        }
-
-        if (highest_speed < (total_speed / animals.length)) {
-            highest_speed = (total_speed / animals.length);
-            speed_data.forEach((entry, i) => speed_data[i] = entry * highest_speed / (total_speed / animals.length));
-            
-        }
-
-        if (highest_sense < (total_sense / animals.length)) {
-            highest_sense = (total_sense / animals.length);
-            sense_data.forEach((entry, i) => sense_data[i] = entry * highest_sense / (total_sense / animals.length));
-            
-        }
-
         size_data.push((total_size / animals.length) / highest_size);
         speed_data.push((total_speed / animals.length) / highest_speed);
         sense_data.push((total_sense / animals.length) / highest_sense);
@@ -416,6 +398,21 @@ function updateGameArea() {
             speed_data.shift();
             sense_data.shift();
             time_mutations.shift();
+        }
+
+        if (highest_size < (total_size / animals.length)) {
+            size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length));
+            highest_size = (total_size / animals.length);
+        }
+
+        if (highest_speed < (total_speed / animals.length)) {
+            speed_data.forEach((entry, i) => speed_data[i] = entry * highest_speed / (total_speed / animals.length));
+            highest_speed = (total_speed / animals.length);
+        }
+
+        if (highest_sense < (total_sense / animals.length)) {
+            sense_data.forEach((entry, i) => sense_data[i] = entry * highest_sense / (total_sense / animals.length));
+            highest_sense = (total_sense / animals.length);
         }
 
         mutations_chart_var.update();
