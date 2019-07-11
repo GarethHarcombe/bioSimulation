@@ -7,10 +7,12 @@
     </head>
     <body onload="startGame()">
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-        <button id="pausePlayButton" type="button">Pause</button>
-        <input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
-        <p>Speed: <span id="sim_speed_value"></span></p>
+		<div>
+			<button id="pausePlayButton" type="button">Pause</button>
+			Speed
+			<input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
+			<span id="sim_speed_value"></span>
+		</div>
 
         <div style="width:50%;">
             <canvas id="overall_chart"></canvas>
@@ -49,13 +51,13 @@
         <p>Food Spawn</p>
         <div class="slide_container">
             <input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider">
-            <p>Food Spawn Rate: <span id="food_spawn_value"></span></p>
+            <span id="food_spawn_value"></span>
         </div>
 
         <p>Food Nutrition</p>
         <div class="slide_container">
             <input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider">
-            <p>Food Nutritional Value: <span id="food_value_value"></span></p>
+            <span id="food_value_value"></span>
         </div>
 
         <div class="current_information_container">

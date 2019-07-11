@@ -9,6 +9,7 @@ var eating_size_percentage = 0.5;
 var food_value = 100;
 var paused = false;
 var frame_rate = 20;
+var interval;
 
 var population_data = [];
 var food_data = [];
@@ -107,6 +108,9 @@ food_spawn_rate = spawnPHP;
 food_value = nutritionPHP;
 
 sim_speed_slider.oninput = function () {
+    if (paused == true) {
+        pausePlayGame();
+    }
     sim_speed_output.innerHTML = (this.value / 20).toFixed(2);
     frame_rate = 400 / this.value;
     window.clearInterval(interval);
