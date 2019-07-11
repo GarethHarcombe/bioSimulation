@@ -111,6 +111,11 @@ food_value_slider.oninput = function () {
     food_value = parseInt(this.value, 10);
 }
 
+if (mutations_speedPHP == mutations_sensePHP && mutations_sensePHP == mutations_sizePHP && mutations_sizePHP == false) {
+    mutationsPHP = false;
+    console.log(mutationsPHP);
+}
+
 if (mutationsPHP == true) {
     document.getElementById("mutations_checkbox").checked = true;
     var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
@@ -179,6 +184,18 @@ if (mutationsPHP == true) {
 }
 else {
     document.getElementById("mutations_chart").parentNode.removeChild(document.getElementById("mutations_chart"));
+}
+
+if (mutations_speedPHP == true) {
+    document.getElementById("mutations_speed_checkbox").checked = true;
+}
+
+if (mutations_sensePHP == true) {
+    document.getElementById("mutations_sense_checkbox").checked = true;
+}
+
+if (mutations_sizePHP == true) {
+    document.getElementById("mutations_size_checkbox").checked = true;
 }
 
 if (kinetic_energyPHP == true) {
@@ -335,22 +352,27 @@ function updateGameArea() {
         }
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
-                colour = "00";
+                colour = 00;
                 if (mutationsPHP == true) {
-                    if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
-                    else { element.speed = element.speed * (1 + mutation_change_rate); }
+                    if (mutations_speedPHP == true) {
+                        if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
+                        else { element.speed = element.speed * (1 + mutation_change_rate); }
+                    }
 
-                    if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * (1 - mutation_change_rate); }
-                    else { element.sense_distance = element.sense_distance * (1 + mutation_change_rate); }
+                    if (mutations_sensePHP == true) {
+                        if (Math.random() < 0.5) { element.sense_distance = element.sense_distance * (1 - mutation_change_rate); }
+                        else { element.sense_distance = element.sense_distance * (1 + mutation_change_rate); }
+                    }
 
-                    if (colour.toString().length == 1) { colour = "0" + colour }
-
-                    if (Math.random() < 0.5) { element.width = element.width * (1 - mutation_change_rate); }
-                    else { element.width = element.width * (1 + mutation_change_rate); }
-                    if (element.width < 1) { element.width = 1 }
-                    element.height = element.width;
+                    if (mutations_sizePHP == true) {
+                        if (Math.random() < 0.5) { element.width = element.width * (1 - mutation_change_rate); }
+                        else { element.width = element.width * (1 + mutation_change_rate); }
+                        if (element.width < 1) { element.width = 1 }
+                        element.height = element.width;
+                    }
                 }
-
+                colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
+                if (colour.toString().length == 1) { colour = "0" + colour }
                 animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
             }
             animals.splice(animals.indexOf(element), 1);
@@ -426,5 +448,16 @@ function updateGameArea() {
         }
 
         overall_chart_var.update();
+
+        if (document.getElementById("mutations_checkbox").checked == false) {
+            document.getElementById("mutations_speed_checkbox").disabled = true;
+            document.getElementById("mutations_sense_checkbox").disabled = true;
+            document.getElementById("mutations_size_checkbox").disabled = true;
+        }
+        else {
+            document.getElementById("mutations_speed_checkbox").disabled = false;
+            document.getElementById("mutations_sense_checkbox").disabled = false;
+            document.getElementById("mutations_size_checkbox").disabled = false;
+        }
     }
 }

@@ -23,8 +23,19 @@
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
 			<input type="hidden" name="mutations" value="false" />
 			Mutations? <input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/>
+
+			<input type="hidden" name="mutations_speed" value="false" />
+			Speed? <input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/>
+
+			<input type="hidden" name="mutations_sense" value="false" />
+			Sense? <input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/>
+
+			<input type="hidden" name="mutations_size" value="false" />
+			Size? <input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/>
+
 			<input type="hidden" name="kinetic_energy" value="false" />
 			Kinetic Energy? <input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/>
+
 			<input type="hidden" name="predation" value="false" />
 			Predation? <input type="checkbox" id="predation_checkbox" name="predation" value="true"/>
 			<input type="submit">
@@ -51,6 +62,10 @@
 
 		<script>
 			var mutationsPHP = <?php echo (!empty($_GET['mutations']) ? $_GET['mutations'] : true); ?>;
+			var mutations_speedPHP = <?php echo (!empty($_GET['mutations_speed']) ? $_GET['mutations_speed'] : true); ?>;
+			var mutations_sensePHP = <?php echo (!empty($_GET['mutations_sense']) ? $_GET['mutations_sense'] : true); ?>;
+			var mutations_sizePHP = <?php echo (!empty($_GET['mutations_size']) ? $_GET['mutations_size'] : true); ?>;
+
 			var kinetic_energyPHP = <?php echo (!empty($_GET['kinetic_energy']) ? $_GET['kinetic_energy'] : true); ?>;
 			var predationPHP = <?php echo (!empty($_GET['predation']) ? $_GET['predation'] : true); ?>;
 		</script>
