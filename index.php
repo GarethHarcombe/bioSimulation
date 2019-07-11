@@ -40,6 +40,9 @@
 			Predation? <input type="checkbox" id="predation_checkbox" name="predation" value="true"/>
 
 			<input type="hidden" name="speed" id="speed_hidden" value="20"/>
+			<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
+			<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
+
 			<input type="submit">
 		</form>
 
@@ -72,6 +75,8 @@
 			var predationPHP = <?php echo (!empty($_GET['predation']) ? $_GET['predation'] : true); ?>;
 
 			var speedPHP = <?php echo (!empty($_GET['speed']) ? $_GET['speed'] : 20); ?>;
+			var spawnPHP = <?php echo (!empty($_GET['spawn']) ? $_GET['spawn'] : 10); ?>;
+			var nutritionPHP = <?php echo (!empty($_GET['nutrition']) ? $_GET['nutrition'] : 100); ?>;
 		</script>
         <script src="app.js"></script>
     </body>

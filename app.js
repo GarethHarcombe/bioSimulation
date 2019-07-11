@@ -93,12 +93,18 @@ var population_output = document.getElementById("population_value");
 var average_speed_output = document.getElementById("average_speed_value");
 var average_sense_output = document.getElementById("average_sense_value");
 var average_size_output = document.getElementById("average_size_value");
-food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
-food_value_output.innerHTML = food_value_slider.value;
-sim_speed_output.innerHTML = (20 / speedPHP).toFixed(2);
-frame_rate = speedPHP;
+
 sim_speed_slider.value = 400 / speedPHP;
-console.log(speedPHP);
+food_spawn_slider.value = 50 / spawnPHP;
+food_value_slider.value = nutritionPHP;
+
+sim_speed_output.innerHTML = (20 / speedPHP).toFixed(2);
+food_spawn_output.innerHTML = (50 / spawnPHP).toFixed(0);
+food_value_output.innerHTML = nutritionPHP;
+
+frame_rate = speedPHP;
+food_spawn_rate = spawnPHP;
+food_value = nutritionPHP;
 
 sim_speed_slider.oninput = function () {
     sim_speed_output.innerHTML = (this.value / 20).toFixed(2);
@@ -110,12 +116,14 @@ sim_speed_slider.oninput = function () {
 
 food_spawn_slider.oninput = function () {
     food_spawn_output.innerHTML = this.value;
-    food_spawn_rate = Math.ceil(50 / this.value);
+    food_spawn_rate = (50 / this.value).toFixed(2);
+    document.getElementById("spawn_hidden").value = food_spawn_rate;
 }
 
 food_value_slider.oninput = function () {
     food_value_output.innerHTML = this.value;
     food_value = parseInt(this.value, 10);
+    document.getElementById("nutrition_hidden").value = food_value;
 }
 
 if (mutations_speedPHP == mutations_sensePHP && mutations_sensePHP == mutations_sizePHP && mutations_sizePHP == false) {
