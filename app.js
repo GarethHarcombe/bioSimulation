@@ -77,10 +77,6 @@ var overall_chart_var = new Chart(overall_chart, {
     }
 });
 
-var mutations = false;
-var predation = false;
-var kinetic_energy = false;
-
 var pausePlayButton = document.getElementById("pausePlayButton");
 pausePlayButton.onclick = pausePlayGame;
 var sim_speed_slider = document.getElementById("sim_speed_slider")
@@ -116,7 +112,6 @@ food_value_slider.oninput = function () {
 }
 
 if (mutationsPHP == true) {
-    mutations = true;
     document.getElementById("mutations_checkbox").checked = true;
     var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
     var mutations_chart_var = new Chart(mutations_chart, {
@@ -187,12 +182,10 @@ else {
 }
 
 if (kinetic_energyPHP == true) {
-    kinetic_energy = true;
     document.getElementById("kinetic_checkbox").checked = true;
 }
 
 if (predationPHP == true) {
-    predation = true;
     document.getElementById("predation_checkbox").checked = true;
 }
 
@@ -299,7 +292,7 @@ function updateGameArea() {
             }
         })
 
-        if (predation == true) {
+        if (predationPHP == true) {
             animals.forEach(element2 => {
                 if (element != element2) {
                     distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
@@ -332,7 +325,7 @@ function updateGameArea() {
         element.y += element.speed * Math.sin(element.angle);
 
         element.energy -= 1;
-        if (kinetic_energy == true) {
+        if (kinetic_energyPHP == true) {
             element.energy -= 0.5 * ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2);
         }
         element.update();
@@ -343,7 +336,7 @@ function updateGameArea() {
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
                 colour = "00";
-                if (mutations == true) {
+                if (mutationsPHP == true) {
                     if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
                     else { element.speed = element.speed * (1 + mutation_change_rate); }
 
@@ -372,7 +365,7 @@ function updateGameArea() {
         food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
-    if (frames % 250 == 0 && mutations == true) {
+    if (frames % 250 == 0 && mutationsPHP == true) {
         if (highest_size < (total_size / animals.length)) {
             highest_size = (total_size / animals.length);
             size_data.forEach((entry, i) => size_data[i] = entry * highest_size / (total_size / animals.length));
