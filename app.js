@@ -77,10 +77,12 @@ var overall_chart_var = new Chart(overall_chart, {
     }
 });
 
+var mutations_checkbox = document.getElementById("mutations_checkbox");
+
 var pausePlayButton = document.getElementById("pausePlayButton");
 pausePlayButton.onclick = pausePlayGame;
-var sim_speed_slider = document.getElementById("sim_speed_slider")
-var sim_speed_output = document.getElementById("sim_speed_value")
+var sim_speed_slider = document.getElementById("sim_speed_slider");
+var sim_speed_output = document.getElementById("sim_speed_value");
 
 var food_spawn_slider = document.getElementById("food_spawn_slider");
 var food_spawn_output = document.getElementById("food_spawn_value");
@@ -93,12 +95,17 @@ var average_sense_output = document.getElementById("average_sense_value");
 var average_size_output = document.getElementById("average_size_value");
 food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
 food_value_output.innerHTML = food_value_slider.value;
+sim_speed_output.innerHTML = (20 / speedPHP).toFixed(2);
+frame_rate = speedPHP;
+sim_speed_slider.value = 400 / speedPHP;
+console.log(speedPHP);
 
 sim_speed_slider.oninput = function () {
-    sim_speed_output.innerHTML = this.value / 20;
+    sim_speed_output.innerHTML = (this.value / 20).toFixed(2);
     frame_rate = 400 / this.value;
     window.clearInterval(interval);
     interval = setInterval(updateGameArea, frame_rate);
+    document.getElementById("speed_hidden").value = frame_rate;
 }
 
 food_spawn_slider.oninput = function () {
@@ -117,7 +124,7 @@ if (mutations_speedPHP == mutations_sensePHP && mutations_sensePHP == mutations_
 }
 
 if (mutationsPHP == true) {
-    document.getElementById("mutations_checkbox").checked = true;
+    mutations_checkbox.checked = true;
     var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
     var mutations_chart_var = new Chart(mutations_chart, {
         type: 'line',
@@ -204,6 +211,19 @@ if (kinetic_energyPHP == true) {
 
 if (predationPHP == true) {
     document.getElementById("predation_checkbox").checked = true;
+}
+
+mutations_checkbox.onclick = function () {
+    if (mutations_checkbox.checked == false) {
+        document.getElementById("mutations_speed_checkbox").disabled = true;
+        document.getElementById("mutations_sense_checkbox").disabled = true;
+        document.getElementById("mutations_size_checkbox").disabled = true;
+    }
+    else {
+        document.getElementById("mutations_speed_checkbox").disabled = false;
+        document.getElementById("mutations_sense_checkbox").disabled = false;
+        document.getElementById("mutations_size_checkbox").disabled = false;
+    }
 }
 
 function startGame() {
@@ -445,16 +465,5 @@ function updateGameArea() {
         }
 
         overall_chart_var.update();
-
-        if (document.getElementById("mutations_checkbox").checked == false) {
-            document.getElementById("mutations_speed_checkbox").disabled = true;
-            document.getElementById("mutations_sense_checkbox").disabled = true;
-            document.getElementById("mutations_size_checkbox").disabled = true;
-        }
-        else {
-            document.getElementById("mutations_speed_checkbox").disabled = false;
-            document.getElementById("mutations_sense_checkbox").disabled = false;
-            document.getElementById("mutations_size_checkbox").disabled = false;
-        }
     }
 }
