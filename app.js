@@ -78,6 +78,41 @@ var overall_chart_var = new Chart(overall_chart, {
 });
 
 var mutations = false;
+
+var pausePlayButton = document.getElementById("pausePlayButton");
+pausePlayButton.onclick = pausePlayGame;
+var sim_speed_slider = document.getElementById("sim_speed_slider")
+var sim_speed_output = document.getElementById("sim_speed_value")
+
+var food_spawn_slider = document.getElementById("food_spawn_slider");
+var food_spawn_output = document.getElementById("food_spawn_value");
+var food_value_slider = document.getElementById("food_value_slider");
+var food_value_output = document.getElementById("food_value_value");
+
+var population_output = document.getElementById("population_value");
+var average_speed_output = document.getElementById("average_speed_value");
+var average_sense_output = document.getElementById("average_sense_value");
+var average_size_output = document.getElementById("average_size_value");
+food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
+food_value_output.innerHTML = food_value_slider.value;
+
+sim_speed_slider.oninput = function () {
+    sim_speed_output.innerHTML = this.value / 20;
+    frame_rate = 400 / this.value;
+    window.clearInterval(interval);
+    interval = setInterval(updateGameArea, frame_rate);
+}
+
+food_spawn_slider.oninput = function () {
+    food_spawn_output.innerHTML = this.value;
+    food_spawn_rate = Math.ceil(50 / this.value);
+}
+
+food_value_slider.oninput = function () {
+    food_value_output.innerHTML = this.value;
+    food_value = parseInt(this.value, 10);
+}
+
 if (mutationsPHP == true) {
     mutations = true;
     document.getElementById("mutationsCheckbox").checked = true;
@@ -149,40 +184,6 @@ else {
     document.getElementById("mutations_chart").parentNode.removeChild(document.getElementById("mutations_chart"));
 }
 
-var pausePlayButton = document.getElementById("pausePlayButton");
-pausePlayButton.onclick = pausePlayGame;
-var sim_speed_slider = document.getElementById("sim_speed_slider")
-var sim_speed_output = document.getElementById("sim_speed_value")
-
-var food_spawn_slider = document.getElementById("food_spawn_slider");
-var food_spawn_output = document.getElementById("food_spawn_value");
-var food_value_slider = document.getElementById("food_value_slider");
-var food_value_output = document.getElementById("food_value_value");
-
-var population_output = document.getElementById("population_value");
-var average_speed_output = document.getElementById("average_speed_value");
-var average_sense_output = document.getElementById("average_sense_value");
-var average_size_output = document.getElementById("average_size_value");
-food_spawn_output.innerHTML = Math.ceil(50 / food_spawn_slider.value);
-food_value_output.innerHTML = food_value_slider.value;
-
-sim_speed_slider.oninput = function () {
-    sim_speed_output.innerHTML = this.value / 20;
-    frame_rate = 400 / this.value;
-    window.clearInterval(interval);
-    interval = setInterval(updateGameArea, frame_rate);
-}
-
-food_spawn_slider.oninput = function () {
-    food_spawn_output.innerHTML = this.value;
-    food_spawn_rate = Math.ceil(50 / this.value);
-}
-
-food_value_slider.oninput = function () {
-    food_value_output.innerHTML = this.value;
-    food_value = parseInt(this.value, 10);
-}
-
 function startGame() {
     myGameArea.start();
 }
@@ -230,6 +231,7 @@ function component(width, height, color, x, y, speed = start_speed, sense_distan
     this.energy = 300;
     this.speed = speed;
     this.sense_distance = sense_distance;
+    this.color = color;
     this.update = function () {
         overall_chart = myGameArea.context;
         overall_chart.fillStyle = color;
@@ -315,13 +317,15 @@ function updateGameArea() {
         element.x += element.speed * Math.cos(element.angle);
         element.y += element.speed * Math.sin(element.angle);
         element.energy -= 0.5 * ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2) + 1;
+        console.log(element.color);
         element.update();
+        
         if (element.energy < 0) {
             animals.splice(animals.indexOf(element), 1);
         }
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
-                colour = 00;
+                colour = "00";
                 if (mutations == true) {
                     if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
                     else { element.speed = element.speed * (1 + mutation_change_rate); }
