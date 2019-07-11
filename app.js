@@ -78,6 +78,8 @@ var overall_chart_var = new Chart(overall_chart, {
 });
 
 var mutations = false;
+var predation = false;
+var kinetic_energy = false;
 
 var pausePlayButton = document.getElementById("pausePlayButton");
 pausePlayButton.onclick = pausePlayGame;
@@ -115,7 +117,7 @@ food_value_slider.oninput = function () {
 
 if (mutationsPHP == true) {
     mutations = true;
-    document.getElementById("mutationsCheckbox").checked = true;
+    document.getElementById("mutations_checkbox").checked = true;
     var mutations_chart = document.getElementById("mutations_chart").getContext('2d');
     var mutations_chart_var = new Chart(mutations_chart, {
         type: 'line',
@@ -182,6 +184,11 @@ if (mutationsPHP == true) {
 }
 else {
     document.getElementById("mutations_chart").parentNode.removeChild(document.getElementById("mutations_chart"));
+}
+
+if (kinetic_energyPHP == true) {
+    kinetic_energy = true;
+    document.getElementById("kinetic_checkbox").checked = true;
 }
 
 function startGame() {
@@ -316,8 +323,11 @@ function updateGameArea() {
 
         element.x += element.speed * Math.cos(element.angle);
         element.y += element.speed * Math.sin(element.angle);
-        element.energy -= 0.5 * ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2) + 1;
-        console.log(element.color);
+
+        element.energy -= 1;
+        if (kinetic_energy == true) {
+            element.energy -= 0.5 * ((element.width * element.height) / 400) * Math.pow(element.speed / start_speed, 2);
+        }
         element.update();
         
         if (element.energy < 0) {

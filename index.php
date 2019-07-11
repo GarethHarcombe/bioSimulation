@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Title</title>
+        <title>Biology Simulation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css">
     </head>
@@ -22,7 +22,9 @@
 
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
 			<input type="hidden" name="mutations" value="false" />
-			Mutations? <input type="checkbox" id="mutationsCheckbox" name="mutations" value="true"/>
+			Mutations? <input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/>
+			<input type="hidden" name="kinetic_energy" value="false" />
+			Kinetic Energy? <input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/>
 			<input type="submit">
 		</form>
 
@@ -47,6 +49,7 @@
 
 		<script>
 			var mutationsPHP = <?php echo (!empty($_GET['mutations']) ? $_GET['mutations'] : true); ?>;
+			var kinetic_energyPHP = <?php echo (!empty($_GET['kinetic_energy']) ? $_GET['kinetic_energy'] : true); ?>;
 		</script>
         <script src="app.js"></script>
     </body>
