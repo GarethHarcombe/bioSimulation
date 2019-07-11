@@ -191,6 +191,11 @@ if (kinetic_energyPHP == true) {
     document.getElementById("kinetic_checkbox").checked = true;
 }
 
+if (predationPHP == true) {
+    predation = true;
+    document.getElementById("predation_checkbox").checked = true;
+}
+
 function startGame() {
     myGameArea.start();
 }
@@ -293,29 +298,31 @@ function updateGameArea() {
                 delete element2;
             }
         })
-        
-        animals.forEach(element2 => {
-            if (element != element2) {
-                distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
-                if (distance < element.sense_distance) {
-                    if (element.width >= element2.width * (1 + eating_size_percentage) &&
-                        distance / (element2.width * element2.height / food_value) < shortestDistance) {
-                        shortestDistance = distance / (element2.width * element2.height / food_value);
-                        newAngle = Math.atan2(element2.y - element.y, element2.x - element.x);
 
-                        if (element.crashWith(element2)) {
-                            element.energy += element2.width * element2.height;
-                            animals.splice(animals.indexOf(element2), 1);
+        if (predation == true) {
+            animals.forEach(element2 => {
+                if (element != element2) {
+                    distance = Math.sqrt(Math.pow(element.x - element2.x, 2) + Math.pow(element.y - element2.y, 2));
+                    if (distance < element.sense_distance) {
+                        if (element.width >= element2.width * (1 + eating_size_percentage) &&
+                            distance / (element2.width * element2.height / food_value) < shortestDistance) {
+                            shortestDistance = distance / (element2.width * element2.height / food_value);
+                            newAngle = Math.atan2(element2.y - element.y, element2.x - element.x);
+
+                            if (element.crashWith(element2)) {
+                                element.energy += element2.width * element2.height;
+                                animals.splice(animals.indexOf(element2), 1);
+                            }
+                        }
+
+                        if (element.width <= element2.width * (1 - eating_size_percentage)) {
+                            shortestDistance = 1;
+                            newAngle = Math.atan2(element2.y - element.y, element2.x - element.x) + Math.PI;
                         }
                     }
-
-                    if (element.width <= element2.width * (1 - eating_size_percentage)) {
-                        shortestDistance = 1;
-                        newAngle = Math.atan2(element2.y - element.y, element2.x - element.x) + Math.PI;
-                    }
                 }
-            }
-        })
+            })
+        }
 
         if (shortestDistance != element.sense_distance) {
             element.angle = newAngle;
