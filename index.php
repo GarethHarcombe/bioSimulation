@@ -20,56 +20,73 @@
 					<span id="sim_speed_value"></span>
 				</div>
 
-				<div class="form_container">
-					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+				<form class="form_container" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+					<div class="form_text">
+						<p>Mutations?</p>
+						<p>Speed?</p>
+						<p>Sense?</p>
+						<p>Size?</p>
+						<p>Kinetic Energy?</p>
+						<p>Predation?</p>
+					</div>
+						
+					<div class="form_input">
 						<input type="hidden" name="mutations" value="false"/>
-						<p>Mutations?</p><input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/>
+						<input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/>
 						<br>
-					
 						<input type="hidden" name="mutations_speed" value="false"/>
-						Speed? <input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/>
+						<input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/>
 						<br>
-					
 						<input type="hidden" name="mutations_sense" value="false"/>
-						Sense? <input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/>
+						<input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/>
 						<br>
-					
 						<input type="hidden" name="mutations_size" value="false"/>
-						Size? <input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/>
+						<input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/>
 						<br>
-					
 						<input type="hidden" name="kinetic_energy" value="false"/>
-						Kinetic Energy? <input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/>
+						<input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/>
 						<br>
-					
 						<input type="hidden" name="predation" value="false"/>
-						Predation? <input type="checkbox" id="predation_checkbox" name="predation" value="true"/>
+						<input type="checkbox" id="predation_checkbox" name="predation" value="true"/>
 						<br>
-					
 						<input type="hidden" name="speed" id="speed_hidden" value="20"/>
 						<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
 						<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
-
 						<input type="submit">
-					</form>
-				</div>
+					</div>
+				</form>
 
 				<div class="slide_container">
-					Food Spawn
-					<input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider">
-					<span id="food_spawn_value"></span>
-					<br>
+					<div class="slide_text">
+						<p>Food Spawn</p>
+						<p>Food Nutrition</p>
+					</div>
 
-					Food Nutrition
-					<input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider">
-					<span id="food_value_value"></span>
+					<div class="slide_sliders">
+						<input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"><br>
+						<input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider">
+					</div>
+
+					<div class="slide_output">
+						<span id="food_spawn_value"></span><br>
+						<span id="food_value_value"></span>
+					</div>
 				</div>
 
 				<div class="information_container">
-					Current Population: <span id="population_value"></span><br>
-					Average Population Speed: <span id="average_speed_value"></span><br>
-					Average Sense Radius: <span id="average_sense_value"></span><br>
-					Average Size: <span id="average_size_value"></span>
+					<div class="information_text">
+						<p>Current Population: </p>
+						<p>Average Speed: </p>
+						<p>Average Sense Radius: </p>
+						<p>Average Size: </p>
+					</div>
+
+					<div class="information_output">
+						<span id="population_value"></span><br>
+						<span id="average_speed_value"></span><br>
+						<span id="average_sense_value"></span><br>
+						<span id="average_size_value"></span>
+					</div>
 				</div>
 			</section>
 

@@ -13,8 +13,7 @@ html {
 
 body {
     background: #f9f9f9;
-    margin: 20px 50px 20px 20px;
-    line-height: 1.7;
+    margin: 20px 40px 20px 20px;
 }
 
 .wrapper {
@@ -39,19 +38,51 @@ canvas {
 .information_container {
     grid-area: information;
     background: var(--primary);
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 3fr 1fr;
+}
+
+.information_output span {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.information_text {
+    text-align: right;
 }
 
 .form_container {
     grid-area: form;
     background: var(--primary);
     display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    grid-template-columns: 2fr 1fr;
+}
+
+.form_container input {
+    margin-top: 1.05rem;
+}
+
+.form_container p {
+    text-align: right;
 }
 
 .slide_container {
     grid-area: slider;
     background: var(--primary);
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 2fr 110px 1fr;
+}
+
+.slide_text {
+    text-align: right;
+}
+
+.slide_sliders input, .slide_output span {
+    display: inline-block;
+    margin-top: 1rem;
 }
 
 .pause_play {
