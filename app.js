@@ -120,7 +120,8 @@ sim_speed_slider.oninput = function () {
 
 food_spawn_slider.oninput = function () {
     food_spawn_output.innerHTML = this.value;
-    food_spawn_rate = (50 / this.value).toFixed(2);
+    food_spawn_rate = (50 / this.value).toFixed(0);
+    console.log(food_spawn_rate);
     document.getElementById("spawn_hidden").value = food_spawn_rate;
 }
 
@@ -268,7 +269,7 @@ var myGameArea = {
         }
 
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        document.getElementById("simulation").appendChild(this.canvas);
         interval = setInterval(updateGameArea, frame_rate);
     },
     clear: function () {

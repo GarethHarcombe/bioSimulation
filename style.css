@@ -1,10 +1,68 @@
-canvas {
-    border: 1px solid #d3d3d3;
-    background-color: #f1f1f1;
+:root {
+    --primary: #f1f1f1;
+    --dark: #000;
+    --light: #fff;
+    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
 
-.slide_container, .current_information_container {
-    width: 100%;
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark);
+}
+
+body {
+    background: #f9f9f9;
+    margin: 20px 50px 20px 20px;
+    line-height: 1.7;
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.top_container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 
+        'canvas information form slider' 
+        'pause_play information form slider';
+}
+
+canvas {
+    grid-area: canvas;
+    border: 1px solid #d3d3d3;
+    background-color: var(--primary);
+}
+
+.information_container {
+    grid-area: information;
+    background: var(--primary);
+}
+
+.form_container {
+    grid-area: form;
+    background: var(--primary);
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.slide_container {
+    grid-area: slider;
+    background: var(--primary);
+}
+
+.pause_play {
+    grid-area: pause_play;
+    background: var(--primary);
+}
+
+.bottom_container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .slider {
@@ -23,7 +81,7 @@ canvas {
     opacity: 1;
 }
 
-.slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb { /* Place in same as moz-range-thumb???? */
     -webkit-appearance: none;
     width: 25px;
     height: 25px;
@@ -32,6 +90,7 @@ canvas {
 }
 
 .slider::-moz-range-thumb {
+    -webkit-appearance: none;
     width: 25px;
     height: 25px;
     background: #4CAF50;
