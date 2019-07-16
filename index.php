@@ -99,11 +99,11 @@
 			</section>
 
 			<section class="bottom_container">
-				<div class="chart overall_chart_container">
+				<div class="overall_chart_container">
 					<canvas id="overall_chart"></canvas>
 				</div>
 
-				<div class="chart mutations_chart_container">
+				<div class="mutations_chart_container">
 					<canvas id="mutations_chart"></canvas>
 				</div>
 			</section>
