@@ -14,7 +14,7 @@
 				<div id="simulation"></div>
 			
 				<div class="pause_play">
-					<button id="pausePlayButton" type="button">Pause</button>
+					<button id="pause_play_button" type="button">Pause</button>
 					Speed
 					<input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
 					<span id="sim_speed_value"></span>

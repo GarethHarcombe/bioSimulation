@@ -40,16 +40,15 @@ input[type=submit]:hover, button:hover {
     opacity: 1;
 }
 
+#pause_play_button {
+    width: 60px;
+}
+
 .top_container {
     display: grid;
     grid-gap: 20px;
     grid-template-areas: 'canvas information form slider' 'pause_play information form slider';
-}
-
-canvas {
-    grid-area: canvas;
-    border: var(--border);
-    background-color: var(--primary);
+    grid-template-columns: 482px 2fr 1fr 2fr;
 }
 
 .information_container {
@@ -84,7 +83,19 @@ table {
     background: var(--primary);
     border: var(--border);
     padding: 7px;
-    max-width: 470px;
+    width: 466px;
+    text-align: right;
+    margin: 0 0 0 auto;
+}
+
+#simulation {
+    text-align: right;
+}
+
+canvas {
+    grid-area: canvas;
+    border: var(--border);
+    background-color: var(--primary);
 }
 
 .bottom_container {

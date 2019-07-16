@@ -80,8 +80,8 @@ var overall_chart_var = new Chart(overall_chart, {
 
 var mutations_checkbox = document.getElementById("mutations_checkbox");
 
-var pausePlayButton = document.getElementById("pausePlayButton");
-pausePlayButton.onclick = pausePlayGame;
+var pause_play_button = document.getElementById("pause_play_button");
+pause_play_button.onclick = pausePlayGame;
 var sim_speed_slider = document.getElementById("sim_speed_slider");
 var sim_speed_output = document.getElementById("sim_speed_value");
 
@@ -247,12 +247,12 @@ function pausePlayGame() {
     if (paused == false) {
         paused = true;
         window.clearInterval(interval);
-        pausePlayButton.innerHTML = "Play";
+        pause_play_button.innerHTML = "Play";
     }
     else {
         paused = false;
         interval = setInterval(updateGameArea, frame_rate);
-        pausePlayButton.innerHTML = "Pause";
+        pause_play_button.innerHTML = "Pause";
     }
 }
 
