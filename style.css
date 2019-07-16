@@ -3,17 +3,19 @@
     --dark: #000;
     --light: #fff;
     --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+    --border: 1px solid #d3d3d3;
 }
 
 html {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--dark);
+    line-height: 1.7;
 }
 
 body {
     background: #f9f9f9;
-    margin: 20px 40px 20px 20px;
+    margin: 20px 30px 20px 20px;
 }
 
 .wrapper {
@@ -31,63 +33,41 @@ body {
 
 canvas {
     grid-area: canvas;
-    border: 1px solid #d3d3d3;
+    border: var(--border);
     background-color: var(--primary);
+}
+
+.simulation {
+    text-align: center;
 }
 
 .information_container {
     grid-area: information;
     background: var(--primary);
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 3fr 1fr;
-}
-
-.information_output span {
-    display: inline-block;
-    margin-top: 1rem;
-}
-
-.information_text {
-    text-align: right;
+    border: var(--border);
 }
 
 .form_container {
     grid-area: form;
     background: var(--primary);
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 2fr 1fr;
+    border: var(--border);
 }
 
-.form_container input {
-    margin-top: 1.05rem;
-}
-
-.form_container p {
+.form_container table td:nth-child(odd), .slide_container td:first-child, .information_container table td:nth-child(odd) {
     text-align: right;
 }
 
 .slide_container {
     grid-area: slider;
     background: var(--primary);
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 2fr 110px 1fr;
-}
-
-.slide_text {
-    text-align: right;
-}
-
-.slide_sliders input, .slide_output span {
-    display: inline-block;
-    margin-top: 1rem;
+    border: var(--border);
 }
 
 .pause_play {
     grid-area: pause_play;
     background: var(--primary);
+    border: var(--border);
+    padding: 5px;
 }
 
 .bottom_container {

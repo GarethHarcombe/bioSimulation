@@ -21,72 +21,80 @@
 				</div>
 
 				<form class="form_container" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-					<div class="form_text">
-						<p>Mutations?</p>
-						<p>Speed?</p>
-						<p>Sense?</p>
-						<p>Size?</p>
-						<p>Kinetic Energy?</p>
-						<p>Predation?</p>
-					</div>
-						
-					<div class="form_input">
-						<input type="hidden" name="mutations" value="false"/>
-						<input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/>
-						<br>
-						<input type="hidden" name="mutations_speed" value="false"/>
-						<input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/>
-						<br>
-						<input type="hidden" name="mutations_sense" value="false"/>
-						<input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/>
-						<br>
-						<input type="hidden" name="mutations_size" value="false"/>
-						<input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/>
-						<br>
-						<input type="hidden" name="kinetic_energy" value="false"/>
-						<input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/>
-						<br>
-						<input type="hidden" name="predation" value="false"/>
-						<input type="checkbox" id="predation_checkbox" name="predation" value="true"/>
-						<br>
-						<input type="hidden" name="speed" id="speed_hidden" value="20"/>
-						<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
-						<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
-						<input type="submit">
-					</div>
+					<table>
+						<tr>
+							<td>Mutations?</td>
+							<td><input type="hidden" name="mutations" value="false"/>
+							<input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/></td>
+						</tr>
+						<tr>
+							<td> - Speed?</td>
+							<td><input type="hidden" name="mutations_speed" value="false"/>
+							<input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/></td>
+						</tr>
+						<tr>
+							<td> - Sense?</td>
+							<td><input type="hidden" name="mutations_sense" value="false"/>
+							<input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/></td>
+						</tr>
+						<tr>
+							<td> - Size?</td>
+							<td><input type="hidden" name="mutations_size" value="false"/>
+							<input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/></td>
+						</tr>
+						<tr>
+							<td>Kinetic Energy?</td>
+							<td><input type="hidden" name="kinetic_energy" value="false"/>
+							<input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/></td>
+						</tr>
+						<tr>
+							<td>Predation?</td>
+							<td><input type="hidden" name="predation" value="false"/>
+						<input type="checkbox" id="predation_checkbox" name="predation" value="true"/></td>
+						</tr>
+					</table>
+
+					<input type="hidden" name="speed" id="speed_hidden" value="20"/>
+					<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
+					<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
+					<input type="submit">
 				</form>
 
 				<div class="slide_container">
-					<div class="slide_text">
-						<p>Food Spawn</p>
-						<p>Food Nutrition</p>
-					</div>
+					<table>
+						<tr>
+							<td>Food Spawn</td>
+							<td><input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"></td>
+							<td><span id="food_spawn_value"></span></td>
+						</tr>
 
-					<div class="slide_sliders">
-						<input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"><br>
-						<input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider">
-					</div>
-
-					<div class="slide_output">
-						<span id="food_spawn_value"></span><br>
-						<span id="food_value_value"></span>
-					</div>
+						<tr>
+							<td>Food Nutrition</td>
+							<td><input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider"></td>
+							<td><span id="food_value_value"></span></td>
+						</tr>
+					</table>
 				</div>
 
 				<div class="information_container">
-					<div class="information_text">
-						<p>Current Population: </p>
-						<p>Average Speed: </p>
-						<p>Average Sense Radius: </p>
-						<p>Average Size: </p>
-					</div>
-
-					<div class="information_output">
-						<span id="population_value"></span><br>
-						<span id="average_speed_value"></span><br>
-						<span id="average_sense_value"></span><br>
-						<span id="average_size_value"></span>
-					</div>
+					<table>
+						<tr>
+							<td>Current Population:</td>
+							<td><span id="population_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Speed:</td>
+							<td><span id="average_speed_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Sense Radius:</td>
+							<td><span id="average_sense_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Size:</td>
+							<td><span id="average_size_value"></span></td>
+						</tr>
+					</table>
 				</div>
 			</section>
 
