@@ -50,6 +50,7 @@ var overall_chart_var = new Chart(overall_chart, {
             duration: 0
         },
         responsive: true,
+        maintainAspectRatio: false,
         tooltips: { enabled: false },
         hover: { mode: null },
         title: {
@@ -133,7 +134,6 @@ food_value_slider.oninput = function () {
 
 if (mutations_speedPHP == mutations_sensePHP && mutations_sensePHP == mutations_sizePHP && mutations_sizePHP == false) {
     mutationsPHP = false;
-    console.log(mutationsPHP);
 }
 
 if (mutationsPHP == true) {
@@ -174,6 +174,7 @@ if (mutationsPHP == true) {
                 duration: 0
             },
             responsive: true,
+            maintainAspectRatio: false,
             tooltips: { enabled: false },
             hover: { mode: null },
             title: {

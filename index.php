@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 		<meta  http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="style.css">
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -18,6 +18,27 @@
 					Speed
 					<input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
 					<span id="sim_speed_value"></span>
+				</div>
+
+				<div class="information_container">
+					<table>
+						<tr>
+							<td>Current Population:</td>
+							<td><span id="population_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Speed:</td>
+							<td><span id="average_speed_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Sense Radius:</td>
+							<td><span id="average_sense_value"></span></td>
+						</tr>
+						<tr>
+							<td>Average Size:</td>
+							<td><span id="average_size_value"></span></td>
+						</tr>
+					</table>
 				</div>
 
 				<form class="form_container" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
@@ -72,27 +93,6 @@
 							<td>Food Nutrition</td>
 							<td><input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider"></td>
 							<td><span id="food_value_value"></span></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="information_container">
-					<table>
-						<tr>
-							<td>Current Population:</td>
-							<td><span id="population_value"></span></td>
-						</tr>
-						<tr>
-							<td>Average Speed:</td>
-							<td><span id="average_speed_value"></span></td>
-						</tr>
-						<tr>
-							<td>Average Sense Radius:</td>
-							<td><span id="average_sense_value"></span></td>
-						</tr>
-						<tr>
-							<td>Average Size:</td>
-							<td><span id="average_size_value"></span></td>
 						</tr>
 					</table>
 				</div>
