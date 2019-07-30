@@ -386,7 +386,7 @@ function updateGameArea() {
         }
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
-                colour = 00;
+                colour = 0;
                 if (mutationsPHP == true) {
                     if (mutations_speedPHP == true) {
                         if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }

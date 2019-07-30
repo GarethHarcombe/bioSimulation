@@ -7,20 +7,37 @@
         <link rel="stylesheet" href="style.css">
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<title>Biology Simulation</title>
+		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
     <body onload="startGame()">
 		<div class="wrapper">
-			<section class="top_container">
-				<div id="simulation"></div>
+			<div class="top_container">
+				<div id="simulation" class="item"></div>
 			
-				<div class="pause_play">
+				<div class="pause_play item">
 					<button id="pause_play_button" type="button">Pause</button>
 					Speed
 					<input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
 					<span id="sim_speed_value"></span>
 				</div>
 
-				<div class="information_container">
+				<div class="slide_container item">
+					<table>
+						<tr>
+							<td>Food Spawn</td>
+							<td><input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"></td>
+							<td><span id="food_spawn_value"></span></td>
+						</tr>
+
+						<tr>
+							<td>Food Nutrition</td>
+							<td><input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider"></td>
+							<td><span id="food_value_value"></span></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="information_container item">
 					<table>
 						<tr>
 							<td>Current Population:</td>
@@ -41,7 +58,7 @@
 					</table>
 				</div>
 
-				<form class="form_container" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+				<form class="form_container item" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
 					<table>
 						<tr>
 							<td>Mutations?</td>
@@ -80,33 +97,17 @@
 					<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
 					<input type="submit">
 				</form>
+			</div>
 
-				<div class="slide_container">
-					<table>
-						<tr>
-							<td>Food Spawn</td>
-							<td><input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"></td>
-							<td><span id="food_spawn_value"></span></td>
-						</tr>
-
-						<tr>
-							<td>Food Nutrition</td>
-							<td><input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider"></td>
-							<td><span id="food_value_value"></span></td>
-						</tr>
-					</table>
-				</div>
-			</section>
-
-			<section class="bottom_container">
-				<div class="overall_chart_container">
-					<canvas id="overall_chart"></canvas>
+			<div class="bottom_container">
+				<div class="overall_chart_container item">
+					<canvas id="overall_chart" alt="Overall Chart displaying Population and Food over time"></canvas>
 				</div>
 
-				<div class="mutations_chart_container">
-					<canvas id="mutations_chart"></canvas>
+				<div class="mutations_chart_container item">
+					<canvas id="mutations_chart" alt="Mutations Chart displaying mutations over time"></canvas>
 				</div>
-			</section>
+			</div>
 
 			<script>
 				var mutationsPHP = <?php echo (!empty($_GET['mutations']) ? $_GET['mutations'] : true); ?>;
