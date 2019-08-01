@@ -10,6 +10,10 @@
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
     <body onload="startGame()">
+		<div class="warning">
+			<p>Welcome to Biology Simulation!<br>Please turn your phone to<br>landscape mode by <br>turning it sideways</p>
+		</div>
+
 		<div class="wrapper">
 			<div class="top_container">
 				<div id="simulation" class="item"></div>
