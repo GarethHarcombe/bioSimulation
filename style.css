@@ -27,6 +27,7 @@ body {
 }
 
 .warning p {
+    text-align: center;
     padding: 2rem;
     background-color: var(--background);
 }
@@ -42,6 +43,7 @@ body {
 }
 
 input[type=submit], button {
+    -webkit-appearance: none;
     background: var(--primary);
     opacity: 0.8;
     padding: 0.5rem;
@@ -59,6 +61,7 @@ input[type=submit]:hover, button:hover {
 }
 
 #pause_play_button {
+    -webkit-appearance: none;
     width: 60px;
 }
 
@@ -73,11 +76,32 @@ input[type=submit]:hover, button:hover {
     grid-area: information;
 }
 
+.hint_icon {
+    background-color: #b5b5b5;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 21px;
+    border-radius: 20px;
+}
+
+.hint {
+    position: absolute;
+    display: none;
+    width: 200px;
+    opacity: 0.93;
+    background-color: var(--primary);
+}
+
+.hint_icon:hover ~ .hint, .hint:hover {
+    display: block;
+}
+
 .form_container {
     grid-area: form;
 }
 
-.form_container table td:nth-child(odd), .slide_container td:first-child, .information_container table td:nth-child(odd) {
+.form_container table td:nth-child(odd), .slide_container td:first-child, .information_container table td:nth-child(even) {
     text-align: right;
 }
 

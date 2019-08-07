@@ -11,7 +11,7 @@
     </head>
     <body onload="startGame()">
 		<div class="warning">
-			<p>Welcome to Biology Simulation!<br>Please turn your phone to<br>landscape mode by <br>turning it sideways</p>
+			<p>Welcome to Biology Simulation!<br>Please turn your phone to landscape mode by turning it sideways</p>
 		</div>
 
 		<div class="wrapper">
@@ -44,18 +44,34 @@
 				<div class="information_container item">
 					<table>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">This displays how many organisms are currently alive</div>
+							</td>
 							<td>Current Population:</td>
 							<td><span id="population_value"></span></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">This displays the average movement speed of the population</div>
+							</td>
 							<td>Average Speed:</td>
 							<td><span id="average_speed_value"></span></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">This displays the average distance at which organisms can sense food</div>
+							</td>
 							<td>Average Sense Radius:</td>
 							<td><span id="average_sense_value"></span></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">This displays the average size of the population</div>
+							</td>
 							<td>Average Size:</td>
 							<td><span id="average_size_value"></span></td>
 						</tr>
