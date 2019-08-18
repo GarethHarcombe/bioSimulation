@@ -11,6 +11,10 @@ var paused = false;
 var frame_rate = 20;
 var interval;
 
+var red_colour = "#FF0000";
+var blue_colour = "#2337FF";
+var yellow_colour = "#FFCC00";
+
 var population_data = [];
 var food_data = [];
 var size_data = [];
@@ -32,16 +36,17 @@ var overall_chart_var = new Chart(overall_chart, {
             label: 'Population',
             data: population_data,
             fill: false,
-            backgroundColor: "#FF0000",
-            borderColor: "#FF0000",
-            borderWidth: 1
+            backgroundColor: red_colour,
+            borderColor: red_colour,
+            borderWidth: 1,
+            pointStyle: "rect"
         },
         {
             label: 'Food',
             data: food_data,
             fill: false,
-            backgroundColor: "green",
-            borderColor: "green",
+            backgroundColor: blue_colour,
+            borderColor: blue_colour,
             borderWidth: 1
         }]
     },
@@ -145,28 +150,30 @@ if (mutationsPHP == true) {
             labels: time_mutations,
             datasets: [
                 {
-                    label: 'Average Size',
-                    data: size_data,
-                    fill: false,
-                    backgroundColor: "black",
-                    borderColor: "black",
-                    borderWidth: 1
-                },
-                {
                     label: 'Average Speed',
                     data: speed_data,
                     fill: false,
-                    backgroundColor: "blue",
-                    borderColor: "blue",
-                    borderWidth: 1
+                    backgroundColor: blue_colour,
+                    borderColor: blue_colour,
+                    borderWidth: 1,
+                    pointStyle: "triangle"
                 },
                 {
                     label: 'Average Sense Distance',
                     data: sense_data,
                     fill: false,
-                    backgroundColor: "pink",
-                    borderColor: "pink",
-                    borderWidth: 1
+                    backgroundColor: yellow_colour,
+                    borderColor: yellow_colour,
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Average Size',
+                    data: size_data,
+                    fill: false,
+                    backgroundColor: red_colour,
+                    borderColor: red_colour,
+                    borderWidth: 1,
+                    pointStyle: "rect"
                 }]
         },
         options: {
@@ -263,10 +270,10 @@ var myGameArea = {
         this.canvas.width = 480;
         this.canvas.height = 270;
         for (i = 0; i < 3; i++) {
-            food.push(new component(5, 5, "green", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
+            food.push(new component(5, 5, blue_colour, Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
         }
         for (i = 0; i < 5; i++) {
-            animals.push(new component(20, 20, "#FF0000", Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
+            animals.push(new component(20, 20, red_colour, Math.floor(Math.random() * this.canvas.width), Math.floor(Math.random() * this.canvas.height)));
         }
 
         this.context = this.canvas.getContext("2d");
@@ -386,7 +393,6 @@ function updateGameArea() {
         }
         else if (element.energy >= 600) {
             for (i = 1; i <= 2; i++) {
-                colour = 0;
                 if (mutationsPHP == true) {
                     if (mutations_speedPHP == true) {
                         if (Math.random() < 0.5) { element.speed = element.speed * (1 - mutation_change_rate); }
@@ -405,9 +411,9 @@ function updateGameArea() {
                         element.height = element.width;
                     }
                 }
-                colour = Math.round((90 / Math.PI) * Math.atan(element.sense_distance - start_sense_distance - 10) + 45);
-                if (colour.toString().length == 1) { colour = "0" + colour }
-                animals.push(new component(element.width, element.height, "#FF00" + colour, element.x, element.y, element.speed, element.sense_distance));
+                colour = red_colour;
+                if (element.sense_distance >= start_sense_distance + 10) { colour = yellow_colour }
+                animals.push(new component(element.width, element.height, colour, element.x, element.y, element.speed, element.sense_distance));
             }
             animals.splice(animals.indexOf(element), 1);
         }
@@ -418,7 +424,7 @@ function updateGameArea() {
     }
 
     if (frames % food_spawn_rate == 0) {
-        food.push(new component(5, 5, "green", Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
+        food.push(new component(5, 5, blue_colour, Math.floor(Math.random() * myGameArea.canvas.width), Math.floor(Math.random() * myGameArea.canvas.height)));
     }
 
     if (frames % 250 == 0 && mutationsPHP == true) {
