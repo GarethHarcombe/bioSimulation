@@ -28,12 +28,20 @@
 				<div class="slide_container item">
 					<table>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">The rate at which food spawns</div>
+							</td>
 							<td>Food Spawn</td>
 							<td><input type="range" min="1" max="50" value="5" class="slider" id="food_spawn_slider"></td>
 							<td><span id="food_spawn_value"></span></td>
 						</tr>
 
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">How much nutrition each bit of food gives</div>
+							</td>
 							<td>Food Nutrition</td>
 							<td><input type="range" min="20" max="600" value="100" class="slider" id="food_value_slider"></td>
 							<td><span id="food_value_value"></span></td>
@@ -81,31 +89,55 @@
 				<form class="form_container item" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
 					<table>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want the organisms to mutate?</div>
+							</td>
 							<td>Mutations?</td>
 							<td><input type="hidden" name="mutations" value="false"/>
 							<input type="checkbox" id="mutations_checkbox" name="mutations" value="true"/></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want the organism speed to mutate?</div>
+							</td>
 							<td> - Speed?</td>
 							<td><input type="hidden" name="mutations_speed" value="false"/>
 							<input type="checkbox" id="mutations_speed_checkbox" name="mutations_speed" value="true"/></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want the organism sense distance to mutate?</div>
+							</td>
 							<td> - Sense?</td>
 							<td><input type="hidden" name="mutations_sense" value="false"/>
 							<input type="checkbox" id="mutations_sense_checkbox" name="mutations_sense" value="true"/></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want the organism size to mutate?</div>
+							</td>
 							<td> - Size?</td>
 							<td><input type="hidden" name="mutations_size" value="false"/>
 							<input type="checkbox" id="mutations_size_checkbox" name="mutations_size" value="true"/></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want kinetic energy to be factored into the simulation?</div>
+							</td>
 							<td>Kinetic Energy?</td>
 							<td><input type="hidden" name="kinetic_energy" value="false"/>
 							<input type="checkbox" id="kinetic_checkbox" name="kinetic_energy" value="true"/></td>
 						</tr>
 						<tr>
+							<td>
+								<div class="hint_icon">?</div>
+								<div class="hint">Do you want organisms to be able to predate others?</div>
+							</td>
 							<td>Predation?</td>
 							<td><input type="hidden" name="predation" value="false"/>
 						<input type="checkbox" id="predation_checkbox" name="predation" value="true"/></td>
