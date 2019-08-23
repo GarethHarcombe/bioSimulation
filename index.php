@@ -17,7 +17,12 @@
 		<div class="wrapper">
 			<div class="top_container">
 				<div id="simulation" class="item"></div>
-			
+				
+				<div class="title_container item">
+					<h1>Biology Simulation</h1>
+					<a href="explanations.php">Biology Explanations</a>
+				</div>
+
 				<div class="pause_play item">
 					<button id="pause_play_button" type="button">Pause</button>
 					Speed

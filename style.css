@@ -1,8 +1,8 @@
 :root {
     --background: #F4F4F4;
     --primary: #2337FF;
-    --border: 1px solid #d3d3d3;
-    //--shadow: 2px 2px 4px 1px #888888;
+    //--border: 2px solid #989898;
+    --shadow: 1px 1px 8px 3px #888888;
 }
 
 html {
@@ -15,6 +15,13 @@ html {
 body {
     background: #f9f9f9;
     margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    text-align: right;
+    font-size: 13.3333px;
 }
 
 .warning {
@@ -45,7 +52,7 @@ body {
     text-align: center;
 }
 
-input[type=submit], button {
+input[type=submit], button, a {
     -webkit-appearance: none;
     background: var(--primary);
     opacity: 0.8;
@@ -59,7 +66,7 @@ input[type=submit] {
     margin: 0.5rem auto;
 }
 
-input[type=submit]:hover, button:hover {
+input[type=submit]:hover, button:hover, a:hover {
     opacity: 1;
 }
 
@@ -71,12 +78,23 @@ input[type=submit]:hover, button:hover {
 .top_container {
     display: grid;
     grid-gap: 20px;
-    grid-template-areas: 'canvas information form slider' 'pause_play information form slider';
-    grid-template-columns: 482px 2fr 1fr 2fr;
+    grid-template-areas: 'title slider information form' 'canvas slider information form' 'canvas pause_play information form';
+    grid-template-columns: 482px 6fr 5fr 4fr;
 }
 
 .information_container {
     grid-area: information;
+}
+
+.title_container {
+    grid-area: title;
+    padding: 7px;
+    width: 468px;
+}
+
+.title_container h1 {
+    font-size: 1.3rem;
+    display: inline;
 }
 
 .hint_icon {
@@ -126,9 +144,6 @@ table {
 .pause_play {
     grid-area: pause_play;
     padding: 7px;
-    width: 466px;
-    text-align: right;
-    margin: 0 0 0 auto;
 }
 
 #simulation {
@@ -180,21 +195,24 @@ table {
     cursor: pointer;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1350px) {
     .top_container {
-        grid-template-areas: 'canvas form' 'pause_play form' 'slider information';
+        grid-template-areas: 'title slider' 'canvas slider' 'canvas pause_play' 'information form';
         grid-template-columns: 482px 1fr;
     }
+}
 
+@media (max-width: 1000px) {
     .bottom_container {
         grid-template-columns: 0.93fr;
     }
 }
 
+
 @media (max-width: 800px) {
     .top_container {
-        grid-template-areas: 'canvas' 'pause_play' 'slider' 'information' 'form';
-        grid-template-columns: 1fr 0.5fr;
+        grid-template-areas: 'title' 'canvas' 'pause_play' 'slider' 'information' 'form';
+        grid-template-columns: 1fr;
     }
 
     #simulation {
