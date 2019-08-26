@@ -89,7 +89,6 @@ input[type=submit]:hover, button:hover, a:hover {
 .title_container {
     grid-area: title;
     padding: 7px;
-    width: 468px;
 }
 
 .title_container h1 {
@@ -150,6 +149,8 @@ table {
     grid-area: canvas;
     text-align: right;
     height: 272px;
+    width: 480px;
+    margin: 0 auto;
 }
 
 .bottom_container {
@@ -210,22 +211,26 @@ table {
 
 
 @media (max-width: 800px) {
-    .top_container {
-        grid-template-areas: 'title' 'canvas' 'pause_play' 'slider' 'information' 'form';
-        grid-template-columns: 1fr;
+    .top_container, .bottom_container {
+        grid-template-areas: '';
+        grid-template-columns: 0px;
+        display: block;
     }
 
-    #simulation {
-        text-align: center;
+    .item {
+        margin-bottom: 20px;
     }
 
     .pause_play {
-        text-align: center;
-        margin: 0 auto;
+        margin: 20px 0px;
+    }
+
+    .overall_chart_container {
+        margin-top: -20px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
     .warning {
         display: inline;
     }
