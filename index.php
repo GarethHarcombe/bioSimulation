@@ -31,6 +31,7 @@
 				</div>
 
 				<div class="slide_container item">
+					<h2>Live Settings</h2>
 					<table>
 						<tr>
 							<td>
@@ -55,6 +56,7 @@
 				</div>
 
 				<div class="information_container item">
+					<h2>Simulation Information</h2>
 					<table>
 						<tr>
 							<td>
@@ -92,6 +94,7 @@
 				</div>
 
 				<form class="form_container item" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+					<h2>Simulation Settings</h2>
 					<table>
 						<tr>
 							<td>
@@ -158,11 +161,11 @@
 
 			<div class="bottom_container">
 				<div class="overall_chart_container item">
-					<canvas id="overall_chart" alt="Overall Chart displaying Population and Food over time"></canvas>
+					<canvas id="overall_chart"></canvas>
 				</div>
 
 				<div class="mutations_chart_container item">
-					<canvas id="mutations_chart" alt="Mutations Chart displaying mutations over time"></canvas>
+					<canvas id="mutations_chart"></canvas>
 				</div>
 			</div>
 
