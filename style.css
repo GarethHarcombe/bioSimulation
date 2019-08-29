@@ -52,6 +52,7 @@ a {
     border: var(--border);
     box-shadow: var(--shadow);
     text-align: center;
+    padding: 5px;
 }
 
 .item h2 {
@@ -158,6 +159,7 @@ table {
     height: 272px;
     width: 480px;
     margin: 0 auto;
+    padding: 0px;
 }
 
 .bottom_container {
@@ -212,13 +214,19 @@ table {
 
 @media (max-width: 1000px) {
     .bottom_container {
-        grid-template-columns: 0.93fr;
+        grid-template-areas: '';
+        grid-template-columns: 0px;
+        display: block;
+    }
+
+    .overall_chart_container {
+        margin-bottom: 20px;
     }
 }
 
 
-@media (max-width: 800px) {
-    .top_container, .bottom_container {
+@media (max-width: 850px) {
+    .top_container {
         grid-template-areas: '';
         grid-template-columns: 0px;
         display: block;
