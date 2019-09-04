@@ -76,7 +76,7 @@ a {
 
 .left {
     grid-area: left;
-    padding: 15px;
+    padding: 0px 15px 15px 15px;
 }
 
 input[type=submit], button, a {
@@ -232,7 +232,7 @@ table {
 }
 
 @media (max-width: 1000px) {
-    .bottom_container {
+    .bottom_container, .horizontal {
         grid-template-areas: '';
         grid-template-columns: 0px;
         display: block;
@@ -240,6 +240,10 @@ table {
 
     .overall_chart_container {
         margin-bottom: 20px;
+    }
+
+    .horizontal img {
+        margin: 15px 10px 0px 10px;
     }
 }
 
@@ -267,5 +271,10 @@ table {
 @media (max-width: 520px) {
     .warning {
         display: inline;
+    }
+
+    .horizontal img {
+        width: 92%;
+        margin: 15px 4% 0px 4%;
     }
 }
