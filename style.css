@@ -3,6 +3,7 @@
     --primary: #2337FF;
     //--border: 2px solid #989898;
     --shadow: 1px 1px 8px 3px #888888;
+    --secondary-text: white;
 }
 
 html {
@@ -60,6 +61,24 @@ a {
     margin: 8px;
 }
 
+.horizontal {
+    display: grid;
+    grid-template-areas: 'left right' 'left right';
+    grid-template-columns: 1fr 430px;
+}
+
+.horizontal img {
+    margin: auto 15px;
+    width: 400px;
+    grid-area: right;
+    box-shadow: var(--shadow);
+}
+
+.left {
+    grid-area: left;
+    padding: 15px;
+}
+
 input[type=submit], button, a {
     -webkit-appearance: none;
     background: var(--primary);
@@ -99,7 +118,7 @@ input[type=submit]:hover, button:hover, a:hover {
     padding: 7px;
 }
 
-.title_container h1 {
+h1 {
     font-size: 1.3rem;
     display: inline;
 }
