@@ -1,7 +1,6 @@
 :root {
     --background: #F4F4F4;
     --primary: #2337FF;
-    //--border: 2px solid #989898;
     --shadow: 1px 1px 8px 3px #888888;
     --secondary-text: white;
 }
@@ -63,14 +62,20 @@ a {
 
 .horizontal {
     display: grid;
-    grid-template-areas: 'left right' 'left right';
+    grid-template-areas: 'left right';
     grid-template-columns: 1fr 430px;
 }
 
-.horizontal img {
+.right {
+    display: flex;
+    grid-area: right;
     margin: auto 15px;
     width: 400px;
-    grid-area: right;
+}
+
+.right img {
+    margin: 15px 0px;
+    width: 100%;
     box-shadow: var(--shadow);
 }
 
@@ -242,8 +247,8 @@ table {
         margin-bottom: 20px;
     }
 
-    .horizontal img {
-        margin: 15px 10px 0px 10px;
+    .right {
+        margin: 0px auto;
     }
 }
 

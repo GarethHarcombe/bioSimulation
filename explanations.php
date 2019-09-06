@@ -17,7 +17,9 @@
 			</div>
 
 			<div class="item horizontal">
-				<img src="RawImages/Standard Simulation.png">
+				<div class="right">
+					<img src="RawImages/Standard Simulation.png">
+				</div>
 				
 				<div class="left">
 					<h2>What's going on?</h2>
@@ -26,7 +28,9 @@
 			</div>
 
 			<div class="item horizontal">
-				<img src="RawImages/Oscillations.png">
+				<div class="right">
+					<img src="RawImages/Oscillations.png">
+				</div>
 				
 				<div class="left">
 					<h2>The current population seems to oscillate between high and low - why?</h2>
@@ -37,17 +41,21 @@
 			</div>
 
 			<div class="item horizontal">
-				<img src="https://media.giphy.com/media/mGPtjyQeDgUxsCgD0V/giphy.gif">
+				<div class="right">
+					<img src="https://media.giphy.com/media/mGPtjyQeDgUxsCgD0V/giphy.gif">
+				</div>
 
 				<div class="left">
 					<h2>The speed trait</h2>
 					We would typically assume that more speed is advantageous in any organism. However, when running the simulation, the speed does not increase infinitely, it reaches a limit - why? This is because having a high speed requires more energy. Kinetic energy is defined as 0.5 * mass * velocity squared, and so an increasing velocity leads to a dramatically increasing consumption of energy. Speed is still beneficial and necessary in order to reach food before other organisms, but too much speed results in an energy consumption which is too high for the organism to provide, resulting in death. Therefore, a balance is found.
-					You can play around with this by displaying kinetic energy. As a result, there is no limit of the maximum speed, leading to the organisms increasing in speed infinitely.
+					You can play around with this by disabling kinetic energy. As a result, there is no limit of the maximum speed, leading to the organisms increasing in speed infinitely.
 				</div>
 			</div>
 
 			<div class="item horizontal">
-				<img src="RawImages/SenseDistance.png">
+				<div class="right">
+					<img src="RawImages/SenseDistance.png">
+				</div>
 
 				<div class="left">
 					<h2>The sense trait</h2>
@@ -56,7 +64,9 @@
 			</div>
 
 			<div class="item horizontal">
-				<img src="RawImages/Size.png">
+				<div class="right">
+					<img src="RawImages/Size.png">
+				</div>
 
 				<div class="left">
 					<h2>The size trait</h2>
@@ -66,7 +76,9 @@
 			</div>
 
 			<div class="item horizontal">
-				<img src="RawImages/Mutations.png">
+				<div class="right">
+					<img src="RawImages/Mutations.png">
+				</div>
 
 				<div class="left">
 					<h2>Genetic drift - why does the simulation run differently with the same settings?</h2>
