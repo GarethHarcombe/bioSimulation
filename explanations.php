@@ -13,7 +13,7 @@
 		<div class="wrapper">
 			<div class="item">
 				<h1>Biology Explanations</h1>
-				<a href="index.php">Biology Simulation</a>
+				<div id="HeaderLink"><a href="index.php">Biology Simulation</a></div>
 			</div>
 
 			<div class="item horizontal">

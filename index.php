@@ -18,7 +18,7 @@
 			<div class="top_container">
 				<div class="title_container item">
 					<h1>Biology Simulation</h1>
-					<a href="explanations.php">Biology Explanations</a>
+					<div id="HeaderLink"><a href="explanations.php">Biology Explanations</a></div>
 				</div>
 				
 				<div id="simulation" class="item"></div>
@@ -155,7 +155,7 @@
 					<input type="hidden" name="speed" id="speed_hidden" value="20"/>
 					<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
 					<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
-					<input type="submit">
+					<input type="submit" value="Reload" onclick="return confirm('This will restart the simulation. Are you sure you want to reload with the updated settings?')">
 				</form>
 			</div>
 
