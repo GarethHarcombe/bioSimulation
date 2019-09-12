@@ -412,7 +412,16 @@ function updateGameArea() {
                     }
                 }
                 colour = red_colour;
-                if (element.sense_distance >= start_sense_distance + 10) { colour = yellow_colour }
+                if (element.sense_distance >= start_sense_distance && element.sense_distance <= start_sense_distance + 20)
+                {
+                    yellow_component = parseInt(((204 / 20) * (element.sense_distance - start_sense_distance)).toFixed(0)).toString(16);
+                    if (yellow_component.length == 1) { yellow_component = "0" + yellow_component }
+                    colour = "#FF" + yellow_component + "00";
+                }
+
+                if (element.sense_distance > start_sense_distance + 20) { colour = yellow_colour; }
+
+
                 animals.push(new component(element.width, element.height, colour, element.x, element.y, element.speed, element.sense_distance));
             }
             animals.splice(animals.indexOf(element), 1);

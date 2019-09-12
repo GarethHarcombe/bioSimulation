@@ -42,7 +42,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="https://media.giphy.com/media/mGPtjyQeDgUxsCgD0V/giphy.gif">
+					<img src="RawImages/SpeedArrows.png">
 				</div>
 
 				<div class="left">
