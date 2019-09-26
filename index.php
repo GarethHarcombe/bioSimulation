@@ -28,6 +28,7 @@
 					Speed
 					<input type="range" min="4" max="100" value="20" class="slider" id="sim_speed_slider">
 					<span id="sim_speed_value"></span>
+					<div id="restart_button"><a href="index.php" onclick="return confirm('This will reset the simulation. Are you sure you want to reload with the basic starting settings?')">Reset Simulation</a></div>
 				</div>
 
 				<div class="slide_container item">
@@ -155,7 +156,7 @@
 					<input type="hidden" name="speed" id="speed_hidden" value="20"/>
 					<input type="hidden" name="spawn" id="spawn_hidden" value="10"/>
 					<input type="hidden" name="nutrition" id="nutrition_hidden" value="100"/>
-					<input type="submit" value="Reload" onclick="return confirm('This will restart the simulation. Are you sure you want to reload with the updated settings?')">
+					<input type="submit" value="Sumbit and Reload" onclick="return confirm('This will restart the simulation. Are you sure you want to reload with the updated settings?')">
 				</form>
 			</div>
 

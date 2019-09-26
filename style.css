@@ -108,9 +108,13 @@ input[type=submit]:hover, button:hover, a:hover {
     opacity: 1;
 }
 
-#pause_play_button {
+#pause_play_button{
     -webkit-appearance: none;
     width: 60px;
+}
+
+#restart_button {
+    margin: 0.25rem auto;
 }
 
 .top_container {
