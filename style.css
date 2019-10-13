@@ -225,7 +225,7 @@ table {
     opacity: 1;
 }
 
-.slider::-webkit-slider-thumb { /* Place in same as moz-range-thumb???? */
+.slider::-webkit-slider-thumb { /* Has to be placed in different rule to -moz- despite apparent inefficiency */
     -webkit-appearance: none;
     width: 25px;
     height: 25px;

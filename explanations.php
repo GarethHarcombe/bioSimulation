@@ -18,7 +18,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/Standard Simulation.png">
+					<img src="Images/StandardSimulation.PNG" alt="A standard simulation">
 				</div>
 				
 				<div class="left">
@@ -29,7 +29,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/Oscillations.png">
+					<img src="Images/Oscillations.PNG" alt="Graph of Oscillating Values">
 				</div>
 				
 				<div class="left">
@@ -42,7 +42,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/SpeedArrows.png">
+					<img src="Images/SpeedArrows.PNG" alt="Different speed values for organisms">
 				</div>
 
 				<div class="left">
@@ -54,7 +54,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/SenseDistance.png">
+					<img src="Images/SenseDistance.PNG" alt="Different coloured organisms with lighter colours">
 				</div>
 
 				<div class="left">
@@ -65,7 +65,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/Size.png">
+					<img src="Images/Size.PNG" alt="Organisms with different sizes">
 				</div>
 
 				<div class="left">
@@ -77,7 +77,7 @@
 
 			<div class="item horizontal">
 				<div class="right">
-					<img src="RawImages/Mutations.png">
+					<img src="Images/Mutations.PNG" alt="Graph of varying traits">
 				</div>
 
 				<div class="left">
